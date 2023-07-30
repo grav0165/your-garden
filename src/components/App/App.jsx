@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+import Search from '../Search/Search';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -66,6 +67,12 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+          exact
+          path="/search"
+          >
+            <Search />
           </ProtectedRoute>
 
           <Route
