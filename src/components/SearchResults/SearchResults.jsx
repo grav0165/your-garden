@@ -1,4 +1,5 @@
 import React from "react";
+import './SearchResults.css'
 
 
 
@@ -9,6 +10,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 // importing store 
 import { useSelector } from "react-redux";
@@ -16,60 +18,65 @@ import { useEffect } from "react";
 
 
 function searchResults() {
-
+    // Store that holds all of the results from the API search
     const apiSearchResult = useSelector(store => store.api.apiSearchResponse)
-   
 
-    const handleStore = () => {
-        console.log('apiSearchResult is the following array: ', apiSearchResult)
+    // API dispatch to call up details of a specific plant
+    const handleDetails = () => {
+        
     }
+
 
     // Created a variable thats conditional to avoid broken links
     let image;
-
-   const plantImage = (plant) => {
+    const plantImage = (plant) => {
         if (plant?.default_image == null) {
             image = "images/default.png";
         } else if (plant?.default_image?.original_url == "https://perenual.com/storage/image/upgrade_access.jpg") {
             image = "images/default.png";
         } else {
             image = plant?.default_image?.original_url;
-            
         }
         return image
     }
-    
+
 
 
     return (
-        <div className="search-results-inside">
-            <h1>Results Here</h1>
-            {apiSearchResult.map(plant => {
-                return (
+        <>
+            <Grid container spacing={{s: 2, md: 0.5}} columns={{ xs: 4, sm: 8, md: 12}}>
+                
+                    {apiSearchResult.map(plant => {
+                        return (
+                        <Grid xs={8} s={7} md={4}>
+                            <CardActionArea onClick={handleDetails}>
+                                <Card
+                                    key={plant?.id}
+                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                                    className="result-card">
+                                    <CardMedia
+                                        component='img'
+                                        height='240'
+                                        image={plantImage(plant)}
+                                        alt={plant?.common_name}
+                                    />
+                                    <Typography>
+                                        {plant?.common_name}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="text.secondary">
+                                        {plant?.scientific_name}
+                                    </Typography>
+                                </Card>
+                            </CardActionArea>
+                            </Grid>
 
-                    <Card
-                        key={plant?.id}
-                        sx={{ width: 350, minWidth: 200, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2 }}
-                        className="result-card">
-                        <CardMedia
-                            component='img'
-                            height='340'
-                            image={plantImage(plant)}
-                            alt={plant?.common_name}
-                        />
-                        <Typography>
-                            {plant?.common_name}
-                        </Typography>
-                        <Typography
-                            variant="body2"
-                            color="text.secondary">
-                            {plant?.scientific_name}
-                        </Typography>
-                    </Card>
-
-                )
-            })}
-        </div>
+                        )
+                    })}
+                
+            </Grid>
+        </>
 
     )
 
