@@ -26,13 +26,19 @@ function searchResults () {
              <h1>Results Here</h1>
              { apiSearchResult.map(plant => {
                 return(
-                    <Card key={plant?.id} sx={{ width: 350, minWidth: 200}} className="result-card">
+                    <Card key={plant?.id} sx={{ width: 350, minWidth: 200, display: 'flex', flexDirection: 'column'}} className="result-card">
                         <CardMedia 
                             component='img'
                             height='140'
                             image={plant?.default_image?.original_url}
                             alt={plant?.common_name}
                         />
+                        <Typography>
+                            {plant?.common_name}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {plant?.scientific_name}
+                        </Typography>
                     </Card>
                 )
              })}
