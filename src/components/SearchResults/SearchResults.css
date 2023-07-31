@@ -2,8 +2,8 @@
 
 }
 
-.search-results {
+.search-results.inside {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    
 }
