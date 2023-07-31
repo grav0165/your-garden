@@ -51,7 +51,7 @@ function Search () {
                 <SearchResults></SearchResults>
             </div>
         
-        <Button variant="contained" onClick={handleDetails}>Details</Button>
+       
         </div>
     )
 

@@ -1,5 +1,6 @@
 import React from "react";
-import './SearchResults.css'
+import './SearchResults.css';
+import { useDispatch } from "react-redux";
 
 
 
@@ -15,15 +16,26 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 // importing store 
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 
 function searchResults() {
     // Store that holds all of the results from the API search
     const apiSearchResult = useSelector(store => store.api.apiSearchResponse)
+    // Calling in dispatch to use for Saga request
+    const dispatch = useDispatch();
+    // Calling history to push into details page
+    const history = useHistory();
 
     // API dispatch to call up details of a specific plant
-    const handleDetails = () => {
-        
+    const handleDetails = (event, plant) => {
+        console.log('Click on detail, ', plant?.id)
+        event.preventDefault();
+        dispatch({
+            type: 'SEARCH_API_DETAILS',
+            payload: plant?.id
+        })
+       
     }
 
 
@@ -44,16 +56,16 @@ function searchResults() {
 
     return (
         <>
-            <Grid container spacing={{s: 2, md: 0.5}} columns={{ xs: 4, sm: 8, md: 12}}>
-                
-                    {apiSearchResult.map(plant => {
-                        return (
+            <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+
+                {apiSearchResult.map(plant => {
+                    return (
                         <Grid xs={8} s={7} md={4}>
-                            <CardActionArea onClick={handleDetails}>
-                                <Card
-                                    key={plant?.id}
-                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
-                                    className="result-card">
+                            <Card
+                                key={plant?.id}
+                                sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                                className="result-card">
+                                <CardActionArea onClick={() => handleDetails(plant)}>
                                     <CardMedia
                                         component='img'
                                         height='240'
@@ -68,13 +80,14 @@ function searchResults() {
                                         color="text.secondary">
                                         {plant?.scientific_name}
                                     </Typography>
-                                </Card>
-                            </CardActionArea>
-                            </Grid>
+                                </CardActionArea>
+                            </Card>
 
-                        )
-                    })}
-                
+                        </Grid>
+
+                    )
+                })}
+
             </Grid>
         </>
 
