@@ -26,4 +26,15 @@ perenualRouter.get('/careDetails', (req, res) => {
     })
 })
 
+perenualRouter.get('/search/:search', (req, res) => {
+    let searchQuery = req.params.search
+    axios.get(`https://perenual.com/api/species-list?page=1&key=${process.env.PERENUAL_API_KEY}&q=${searchQuery}`)
+    .then( response => {
+        res.send(response.data)
+    })
+    .catch (error => {
+        console.log('error in router with API search: ', error)
+    })
+})
+
 module.exports = perenualRouter;
