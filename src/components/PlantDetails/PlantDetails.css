@@ -1,12 +1,15 @@
-.search-results {
+.details-main {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-
+    width: 90%;
 }
 
-.search-page {
+.details-full-page {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.interaction-buttons {
+    margin: 30px;
 }
