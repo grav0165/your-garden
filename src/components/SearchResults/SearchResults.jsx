@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
+
 // importing store 
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -20,6 +21,7 @@ import { useHistory } from "react-router-dom";
 
 
 function searchResults() {
+    
     // Store that holds all of the results from the API search
     const apiSearchResult = useSelector(store => store.api.apiSearchResponse)
     // Calling in dispatch to use for Saga request
@@ -36,7 +38,7 @@ function searchResults() {
             type: 'SEARCH_API_DETAILS',
             payload: plant?.id
         })
-       history.push('/details')
+        history.push('/details')
     }
 
 
@@ -57,39 +59,42 @@ function searchResults() {
 
     return (
         <>
-            <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            
+                <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
-                {apiSearchResult.map(plant => {
-                    return (
-                        <Grid xs={8} s={7} md={4} >
-                            <Card
-                                key={plant?.id}
-                                sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
-                                className="result-card">
-                                <CardActionArea onClick={() => handleDetails(event, plant)}>
-                                    <CardMedia
-                                        component='img'
-                                        height='240'
-                                        image={plantImage(plant)}
-                                        alt={plant?.common_name}
-                                    />
-                                    <Typography>
-                                        {plant?.common_name}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="text.secondary">
-                                        {plant?.scientific_name}
-                                    </Typography>
-                                </CardActionArea>
-                            </Card>
+                    {apiSearchResult.map(plant => {
+                        return (
 
-                        </Grid>
+                            <Grid xs={8} s={7} md={4} >
+                                <Card
+                                    key={plant?.id}
+                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                                    className="result-card">
+                                    <CardActionArea onClick={() => handleDetails(event, plant)}>
+                                        <CardMedia
+                                            component='img'
+                                            height='240'
+                                            image={plantImage(plant)}
+                                            alt={plant?.common_name}
+                                        />
+                                        <Typography>
+                                            {plant?.common_name}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="text.secondary">
+                                            {plant?.scientific_name}
+                                        </Typography>
+                                    </CardActionArea>
+                                </Card>
 
-                    )
-                })}
+                            </Grid>
 
-            </Grid>
+                        )
+                    })}
+
+                </Grid>
+
         </>
 
     )

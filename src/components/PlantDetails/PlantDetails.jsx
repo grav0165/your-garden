@@ -13,9 +13,17 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Box from "@mui/material/Box"
+import { responsiveFontSizes, createTheme, ThemeProvider } from "@mui/material/styles";
+
+
+
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
 
 function PlantDetails() {
+
 
     // Importing reducer store of plant details API get
     const plantDetails = useSelector(store => store.api.apiDetailsResponse)
@@ -29,30 +37,43 @@ function PlantDetails() {
     }
 
     return (
-        <div className="details-full-page">
-            <div className="details-main">
-                <Grid xs={8} s={7} md={4} sx={{display: 'flex', flexDirection: 'row'}}>
-                <Card elevation={5}>
-                    <CardMedia
-                        component='img'
-                        width='450'
-                        height='550'
-                        image={plantDetails?.base?.default_image?.original_url}
-                        sx={{ flexGrow: 2}}
-                    />
-                </Card>
-                <Card elevation={5} sx={{padding: 2}}>
-                    <Typography>
-                        {plantDetails?.base?.description}
-                    </Typography>
-                </Card>
-                </Grid>
+        <ThemeProvider theme={theme}>
+            <div className="details-full-page">
+                <div className="details-main">
+                    <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'row' }}>
+                        <Grid xs={7}>
+                            <Card elevation={5}>
+                                <CardMedia
+                                    component='img'
+                                    height='500'
+                                    image={plantDetails?.base?.default_image?.original_url}
+                                    sx={{ flexGrow: 2 }}
+                                />
+                            </Card>
+                        </Grid>
+                        <Grid xs={5} lg={4} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                            <Card elevation={5} sx={{ padding: 2, marginBottom: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h4">
+                                    {plantDetails?.base?.common_name}
+                                </Typography>
+                                <Typography variant="subtitle2">
+                                    {plantDetails?.base?.scientific_name[0]}
+                                </Typography>
+                            </Card>
+                            <Card elevation={5} sx={{ padding: 2 }}>
+                                <Typography variant="body1">
+                                    {plantDetails?.base?.description}
+                                </Typography>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                </div>
+                <div className="interaction-buttons">
+                    <Button variant="contained" onClick={handleReturn}>Return</Button>
+                    <Button variant="contained" onClick={() => console.log('object is: ', plantDetails)}>Details</Button>
+                </div>
             </div>
-            <div>
-                <Button onClick={handleReturn}>Return</Button>
-                <Button onClick={() => console.log('object is: ', plantDetails)}>Details</Button>
-            </div>
-        </div>
+        </ThemeProvider>
     )
 
 
