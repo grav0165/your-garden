@@ -55,7 +55,8 @@ function PlantDetails() {
     const handleClose = () => {
         setOpen(false);
     };
-
+    
+    // handle return back to search results
     const handleReturn = () => {
         console.log('Return button clicked')
         history.push('/search')
@@ -78,7 +79,7 @@ function PlantDetails() {
     // Button to add will first add plant to the plant database, then ask for a watering prompt on popper window
     const handleAdd = (plantList) => {
         handleClickOpen();
-        if(plantDatabaseCheck(plantList) == true) {
+        if(plantDatabaseCheck(plantList) == false) {
             dispatch({ 
                 type: 'ADD_PLANT_LOCAL_DB',
                 payload: plantDetails
@@ -153,7 +154,7 @@ function PlantDetails() {
                         <DialogTitle>How would you like to water</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                {plantDetails?.care[0]?.section[0].description}
+                                {plantDetails?.care[0]?.section[0]?.description}
                             </DialogContentText>
                             <TextField
                                 autoFocus
