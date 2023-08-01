@@ -15,7 +15,7 @@ function* fetchPlantList (action) {
 function* addPlant(action) {
     try{
         yield axios.post('/plantList', action.payload)
-        yield put({ type: 'SET_PLANT_DATABASE'})
+        yield put({ type: 'GET_PLANT_LIST'})
     } catch (error) {
         console.log('Error in SAGA to POST new plant to database: ', error)
     }

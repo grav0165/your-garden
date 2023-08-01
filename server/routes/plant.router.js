@@ -21,13 +21,50 @@ plantRouter.get('/', (req, res) => {
 })
 
 plantRouter.post('/', (req, res)=> {
-    console.log('The object given is: ', req.body)
-    sqlParams = req.body
+    console.log('POST request sent to the server')
+    plant = req.body
+    sqlValues = [
+        plant.base.id,
+        plant.base.common_name,
+        plant.base.scientific_name,
+        plant.base.cycle,
+        plant.base.indoor,
+        plant.base.soil,
+        plant.base.growth_rate,
+        plant.base.watering, 
+        plant.base.maintenance,
+        plant.base.sunlight[0],
+        plant.base.default_image.original_url,
+        plant.base.description,
+        plant.care[0].section[0].description,
+        plant.care[0].section[0].description
+    ]
     sqlQuery=`
     INSERT INTO "plant_table" 
-    ("api_id", "common_name", "scientific_name", "cycle", "indoors", "soil", "growth_rate", "watering", "maintenance", "sun", "image", "description", "watering_description", "sunlight_description")
+    ("api_id", 
+    "common_name", 
+    "scientific_name", 
+    "cycle", 
+    "indoors", 
+    "soil", 
+    "growth_rate", 
+    "watering", 
+    "maintenance", 
+    "sun", 
+    "image", 
+    "description", 
+    "watering_description", 
+    "sunlight_description")
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
     `
+    pool.query(sqlQuery, sqlValues)
+    .then(result => {
+        res.sendStatus(201);
+    })
+    .catch(error => {
+        console.log('Error in completed POST plant query: ', error);
+        res.sendStatus(500)
+    })
 })
 
 module.exports = plantRouter;

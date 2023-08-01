@@ -61,21 +61,29 @@ function PlantDetails() {
         history.push('/search')
     }
 
+    // Function to check if id is in the list
+    const plantDatabaseCheck = (plantList) => {
+        let addToList
+        for (let plant of plantList) {
+            if (plant?.api_id == plantDetails?.base?.id) {
+                addToList = false
+            } 
+
+            if (plant?.api_id !== plantDetails?.base?.id) {
+                addToList = true
+            }
+        }
+        return addToList
+    }
     // Button to add will first add plant to the plant database, then ask for a watering prompt on popper window
     const handleAdd = (plantList) => {
         handleClickOpen();
-        for (let plant of plantList) {
-            if (plant?.api_id == plantDetails?.base?.id) {
-                console.log('ID matches in local database')
-            } else {
-                dispatch({ 
-                    type: 'ADD_PLANT_LOCAL_DB',
-                    payload: plantDetails
-                })
-            }
+        if(plantDatabaseCheck(plantList) == true) {
+            dispatch({ 
+                type: 'ADD_PLANT_LOCAL_DB',
+                payload: plantDetails
+            })
         }
-        if (plantList.id )
-        console.log('Add button clicked')
     }
 
     //Button to remove plant from your garden, will keep plant details in plant chart
@@ -145,7 +153,7 @@ function PlantDetails() {
                         <DialogTitle>How would you like to water</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                {plantDetails?.care[0]?.section[0]?.description}
+                                {plantDetails?.care[0]?.section[0].description}
                             </DialogContentText>
                             <TextField
                                 autoFocus
