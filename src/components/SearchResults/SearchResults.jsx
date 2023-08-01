@@ -29,15 +29,26 @@ function searchResults() {
     // Calling history to push into details page
     const history = useHistory();
 
+    // Creating a function to wait
+    const wait = (ms) => {
+        const start = Date.now();
+        let now = start;
+        while (now - start < ms) {
+          now = Date.now();
+        }
+    }
+
     // API dispatch to call up details of a specific plant
     const handleDetails = (event, plant) => {
-
+        
         event.preventDefault();
 
         dispatch({
             type: 'SEARCH_API_DETAILS',
             payload: plant?.id
         })
+        // Wait before rendering next page to allow for API call to complete
+        wait(700);
         history.push('/details')
     }
 

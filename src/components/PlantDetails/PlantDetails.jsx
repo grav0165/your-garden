@@ -23,14 +23,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-
-
-
-
-
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
-
 
 function PlantDetails() {
     // State to handle opening and closing dialogue
@@ -62,24 +56,19 @@ function PlantDetails() {
         history.push('/search')
     }
 
-    // Function to check if id is in the list
-    const plantDatabaseCheck = (plantList) => {
-        let addToList
-        for (let plant of plantList) {
-            if (plant?.api_id == plantDetails?.base?.id) {
-                addToList = false
-            } 
-
-            if (plant?.api_id !== plantDetails?.base?.id) {
-                addToList = true
-            }
-        }
-        return addToList
+    plantList.some(checkDatabase)
+    const checkDatabase = (plantList) => {
+        return plantList.api_id == plantDetails?.base?.id
     }
+
+
+
     // Button to add will first add plant to the plant database, then ask for a watering prompt on popper window
     const handleAdd = (plantList) => {
+        console.log('First item of plant database API_ID: ', plantList[0]?.api_id)
+        console.log('ID from the API detail GET: ', plantDetails?.base?.id)
         handleClickOpen();
-        if(plantDatabaseCheck(plantList) == false) {
+        if(false) {
             dispatch({ 
                 type: 'ADD_PLANT_LOCAL_DB',
                 payload: plantDetails
@@ -154,7 +143,7 @@ function PlantDetails() {
                         <DialogTitle>How would you like to water</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                {plantDetails?.care[0]?.section[0]?.description}
+                                {plantDetails?.care?.[0]?.section?.[0]?.description}
                             </DialogContentText>
                             <TextField
                                 autoFocus
