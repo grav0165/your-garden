@@ -49,31 +49,30 @@ function PlantDetails() {
     const handleClose = () => {
         setOpen(false);
     };
-    
+
     // handle return back to search results
     const handleReturn = () => {
         console.log('Return button clicked')
         history.push('/search')
     }
 
-    plantList.some(checkDatabase)
-    const checkDatabase = (plantList) => {
-        return plantList.api_id == plantDetails?.base?.id
-    }
+
 
 
 
     // Button to add will first add plant to the plant database, then ask for a watering prompt on popper window
-    const handleAdd = (plantList) => {
-        console.log('First item of plant database API_ID: ', plantList[0]?.api_id)
+    const handleAdd = (plantList, plantDetails) => {
         console.log('ID from the API detail GET: ', plantDetails?.base?.id)
         handleClickOpen();
-        if(false) {
-            dispatch({ 
+        const addToDatabase = plantList.some(plant => plant.api_id == plantDetails?.base?.id)
+        if (!addToDatabase) {
+            dispatch({
                 type: 'ADD_PLANT_LOCAL_DB',
                 payload: plantDetails
             })
         }
+
+
     }
 
     //Button to remove plant from your garden, will keep plant details in plant chart
@@ -95,8 +94,8 @@ function PlantDetails() {
 
 
     useEffect(() => {
-        dispatch({ type: 'GET_PLANT_LIST'})
-    },[])
+        dispatch({ type: 'GET_PLANT_LIST' })
+    }, [])
 
     return (
         <ThemeProvider theme={theme}>
@@ -132,13 +131,13 @@ function PlantDetails() {
                 </div>
                 <div className="interaction-buttons">
                     <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={handleReturn} startIcon={<SkipPreviousIcon />}>Return</Button>
-                    <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={() => console.log('object is: ', plantList)}>Details</Button>
+                    <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={() => console.log('object is: ', plantDetails)}>Details</Button>
                 </div>
                 <div className="additional-details">
                     <h4>Additional Plant Details Here</h4>
                 </div>
                 <div className="add-remove-buttons">
-                    <Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={()=>handleAdd(plantList)}>Add</Button>
+                    <Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={() => handleAdd(plantList, plantDetails)}>Add</Button>
                     <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>How would you like to water</DialogTitle>
                         <DialogContent>
