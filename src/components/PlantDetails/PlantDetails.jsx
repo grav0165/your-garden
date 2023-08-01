@@ -19,8 +19,12 @@ function PlantDetails() {
     // Importing reducer store of plant details API get
     const plantDetails = useSelector(store => store.PlantDetails)
 
+    // Importing history to use to push back to the search results
+    const history = useHistory();
+
     const handleReturn = () => {
         console.log('Return button clicked')
+        history.push('/search')
     }
 
     return (

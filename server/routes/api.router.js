@@ -6,7 +6,6 @@ const perenualRouter = express.Router();
 
 perenualRouter.get('/details/:details', (req, res) => {
     let searchQuery = req.params.details
-    console.log('req.params: ', searchQuery);
     axios.get(`https://perenual.com/api/species/details/${searchQuery}?key=${process.env.PERENUAL_API_KEY}`)
     .then ( response => {
         res.send(response.data)

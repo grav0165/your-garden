@@ -29,13 +29,14 @@ function searchResults() {
 
     // API dispatch to call up details of a specific plant
     const handleDetails = (event, plant) => {
-        console.log('Click on detail, ', plant?.id)
+        
         event.preventDefault();
+
         dispatch({
             type: 'SEARCH_API_DETAILS',
             payload: plant?.id
         })
-       
+       history.push('/details')
     }
 
 
