@@ -59,6 +59,7 @@ function PlantDetails() {
     // Button to add will first add plant to the plant database, then ask for a watering prompt on popper window
     const handleAdd = () => {
         handleClickOpen();
+        
         console.log('Add button clicked')
     }
 
