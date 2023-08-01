@@ -14,6 +14,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Box from "@mui/material/Box"
 import { responsiveFontSizes, createTheme, ThemeProvider } from "@mui/material/styles";
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 
 
 
@@ -69,8 +70,8 @@ function PlantDetails() {
                     </Grid>
                 </div>
                 <div className="interaction-buttons">
-                    <Button variant="contained" onClick={handleReturn}>Return</Button>
-                    <Button variant="contained" onClick={() => console.log('object is: ', plantDetails)}>Details</Button>
+                    <Button size="large" variant="contained" elevation={5} sx={{margin: 1}} onClick={handleReturn} startIcon={<SkipPreviousIcon />}>Return</Button>
+                    <Button size="large" variant="contained" elevation={5} sx={{margin: 1}} onClick={() => console.log('object is: ', plantDetails)}>Details</Button>
                 </div>
             </div>
         </ThemeProvider>
