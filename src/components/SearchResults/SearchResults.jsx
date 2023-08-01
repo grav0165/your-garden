@@ -23,7 +23,7 @@ import { useHistory } from "react-router-dom";
 function searchResults() {
     
     // Store that holds all of the results from the API search
-    const apiSearchResult = useSelector(store => store.api.apiSearchResponse)
+    let apiSearchResult = useSelector(store => store.api.apiSearchResponse)
     // Calling in dispatch to use for Saga request
     const dispatch = useDispatch();
     // Calling history to push into details page
