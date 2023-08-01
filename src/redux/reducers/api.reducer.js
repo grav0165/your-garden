@@ -5,7 +5,7 @@ import { combineReducers } from "redux";
 const apiDetailsResponse = (state = {}, action ) => {
     switch (action.type) {
         case 'SET_API_DETAILS_RESULT':
-            return state;
+            return action.payload;
         default:
             return state;
     }

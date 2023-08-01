@@ -29,7 +29,7 @@ function searchResults() {
 
     // API dispatch to call up details of a specific plant
     const handleDetails = (event, plant) => {
-        
+
         event.preventDefault();
 
         dispatch({
@@ -61,12 +61,12 @@ function searchResults() {
 
                 {apiSearchResult.map(plant => {
                     return (
-                        <Grid xs={8} s={7} md={4}>
+                        <Grid xs={8} s={7} md={4} >
                             <Card
                                 key={plant?.id}
                                 sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
                                 className="result-card">
-                                <CardActionArea onClick={() => handleDetails(plant)}>
+                                <CardActionArea onClick={() => handleDetails(event, plant)}>
                                     <CardMedia
                                         component='img'
                                         height='240'

@@ -1,0 +1,11 @@
+.details-main {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+}
+
+.details-full-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
