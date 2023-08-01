@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import './PlantDetails.css'
 
@@ -15,9 +15,24 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Box from "@mui/material/Box"
 import { responsiveFontSizes, createTheme, ThemeProvider } from "@mui/material/styles";
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
+// State to handle opening and closing dialogue
+const [open, setOpen] = useState(false);
 
+// handle click open of dialogue
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  // handle click close of dialogue 
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -35,6 +50,11 @@ function PlantDetails() {
     const handleReturn = () => {
         console.log('Return button clicked')
         history.push('/search')
+    }
+
+    // Button to add will first add plant to the plant database, then ask for a watering prompt on popper window
+    const handleAdd = () => {
+
     }
 
     return (
@@ -72,6 +92,13 @@ function PlantDetails() {
                 <div className="interaction-buttons">
                     <Button size="large" variant="contained" elevation={5} sx={{margin: 1}} onClick={handleReturn} startIcon={<SkipPreviousIcon />}>Return</Button>
                     <Button size="large" variant="contained" elevation={5} sx={{margin: 1}} onClick={() => console.log('object is: ', plantDetails)}>Details</Button>
+                </div>
+                <div className="additional-details">
+                    <h4>Additional Plant Details Here</h4>
+                </div>
+                <div className="add-remove-buttons">
+                    <Button size="large" variant="contianed" elevation={5} sx={{margin: 1}} onClick={handleAdd}>Add</Button><Button size="large" variant="contianed" elevation={5} sx={{margin: 1}} onClick={handleRemove}>Remove</Button>
+                    
                 </div>
             </div>
         </ThemeProvider>
