@@ -22,6 +22,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import MenuItem from '@mui/material/MenuItem';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -29,6 +30,11 @@ theme = responsiveFontSizes(theme);
 function PlantDetails() {
     // State to handle opening and closing dialogue
     const [open, setOpen] = useState(false);
+    // State to hold drop down input
+    const [wateringInput, setWateringInput] = useState();
+
+    // Array of numbers to be used for the dropDown box in watering
+    const dropDown = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
 
     // Importing reducer store of plant details API get
     const plantDetails = useSelector(store => store.api.apiDetailsResponse)
@@ -87,8 +93,23 @@ function PlantDetails() {
     }
 
     // button to handle add to the user's garden, will POST to database
-    const handleAddToGarden = () => {
+    const handleAddToGarden = (event, plantList, plantDetails) => {
+        event.preventDefault();
         console.log('Added to users database');
+        let idToAdd 
+        for(let i=0; i<plantList.length; i++) {
+            if(plantList[i].api_id == plantDetails?.base?.id) {
+                idToAdd = plantList[i].id
+            }
+        }
+        dispatch({
+            type: 'ADD_PLANT_USER',
+            payload: {
+                id: idToAdd,
+                watering: wateringInput
+            }
+        })
+     
         handleClose();
     }
 
@@ -144,19 +165,24 @@ function PlantDetails() {
                             <DialogContentText>
                                 {plantDetails?.care?.[0]?.section?.[0]?.description}
                             </DialogContentText>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="name"
-                                label="Email Address"
-                                type="email"
-                                fullWidth
-                                variant="standard"
-                            />
                         </DialogContent>
                         <DialogActions>
+                        <TextField
+                                id="outlined-select-currency"
+                                select
+                                label="Select"
+                                defaultValue=""
+                                onChange={(event)=>setWateringInput(event.target.value)}
+                                sx={{ width: 175}}
+                            >
+                            {dropDown.map((option) => (
+                                <MenuItem key={option} value={option}>
+                                  {option}
+                                </MenuItem>
+                              ))}
+                              </TextField>
                             <Button size="large" variant="contained" onClick={handleCancel}>Cancel</Button>
-                            <Button size="large" variant="contained" onClick={handleAddToGarden}>Add</Button>
+                            <Button size="large" variant="contained" onClick={()=>handleAddToGarden(event, plantList, plantDetails)}>Add</Button>
                         </DialogActions>
                     </Dialog><Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={handleRemove}>Remove</Button>
 
