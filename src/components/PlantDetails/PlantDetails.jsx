@@ -22,19 +22,19 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
-
-
-
-
+import MenuItem from '@mui/material/MenuItem';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
-
 function PlantDetails() {
     // State to handle opening and closing dialogue
     const [open, setOpen] = useState(false);
+    // State to hold drop down input
+    const [wateringInput, setWateringInput] = useState();
+
+    // Array of numbers to be used for the dropDown box in watering
+    const dropDown = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
 
     // Importing reducer store of plant details API get
     const plantDetails = useSelector(store => store.api.apiDetailsResponse)
@@ -56,34 +56,29 @@ function PlantDetails() {
         setOpen(false);
     };
 
+    // handle return back to search results
     const handleReturn = () => {
         console.log('Return button clicked')
         history.push('/search')
     }
 
-    // Function to check if id is in the list
-    const plantDatabaseCheck = (plantList) => {
-        let addToList
-        for (let plant of plantList) {
-            if (plant?.api_id == plantDetails?.base?.id) {
-                addToList = false
-            } 
 
-            if (plant?.api_id !== plantDetails?.base?.id) {
-                addToList = true
-            }
-        }
-        return addToList
-    }
+
+
+
     // Button to add will first add plant to the plant database, then ask for a watering prompt on popper window
-    const handleAdd = (plantList) => {
+    const handleAdd = (plantList, plantDetails) => {
+        console.log('ID from the API detail GET: ', plantDetails?.base?.id)
         handleClickOpen();
-        if(plantDatabaseCheck(plantList) == true) {
-            dispatch({ 
+        const addToDatabase = plantList.some(plant => plant.api_id == plantDetails?.base?.id)
+        if (!addToDatabase) {
+            dispatch({
                 type: 'ADD_PLANT_LOCAL_DB',
                 payload: plantDetails
             })
         }
+
+
     }
 
     //Button to remove plant from your garden, will keep plant details in plant chart
@@ -98,15 +93,30 @@ function PlantDetails() {
     }
 
     // button to handle add to the user's garden, will POST to database
-    const handleAddToGarden = () => {
+    const handleAddToGarden = (event, plantList, plantDetails) => {
+        event.preventDefault();
         console.log('Added to users database');
+        let idToAdd 
+        for(let i=0; i<plantList.length; i++) {
+            if(plantList[i].api_id == plantDetails?.base?.id) {
+                idToAdd = plantList[i].id
+            }
+        }
+        dispatch({
+            type: 'ADD_PLANT_USER',
+            payload: {
+                id: idToAdd,
+                watering: wateringInput
+            }
+        })
+     
         handleClose();
     }
 
 
     useEffect(() => {
-        dispatch({ type: 'GET_PLANT_LIST'})
-    },[])
+        dispatch({ type: 'GET_PLANT_LIST' })
+    }, [])
 
     return (
         <ThemeProvider theme={theme}>
@@ -142,32 +152,37 @@ function PlantDetails() {
                 </div>
                 <div className="interaction-buttons">
                     <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={handleReturn} startIcon={<SkipPreviousIcon />}>Return</Button>
-                    <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={() => console.log('object is: ', plantList)}>Details</Button>
+                    <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={() => console.log('object is: ', plantDetails)}>Details</Button>
                 </div>
                 <div className="additional-details">
                     <h4>Additional Plant Details Here</h4>
                 </div>
                 <div className="add-remove-buttons">
-                    <Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={()=>handleAdd(plantList)}>Add</Button>
+                    <Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={() => handleAdd(plantList, plantDetails)}>Add</Button>
                     <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>How would you like to water</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                {plantDetails?.care[0]?.section[0].description}
+                                {plantDetails?.care?.[0]?.section?.[0]?.description}
                             </DialogContentText>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="name"
-                                label="Email Address"
-                                type="email"
-                                fullWidth
-                                variant="standard"
-                            />
                         </DialogContent>
                         <DialogActions>
+                        <TextField
+                                id="outlined-select-currency"
+                                select
+                                label="Select"
+                                defaultValue=""
+                                onChange={(event)=>setWateringInput(event.target.value)}
+                                sx={{ width: 175}}
+                            >
+                            {dropDown.map((option) => (
+                                <MenuItem key={option} value={option}>
+                                  {option}
+                                </MenuItem>
+                              ))}
+                              </TextField>
                             <Button size="large" variant="contained" onClick={handleCancel}>Cancel</Button>
-                            <Button size="large" variant="contained" onClick={handleAddToGarden}>Add</Button>
+                            <Button size="large" variant="contained" onClick={()=>handleAddToGarden(event, plantList, plantDetails)}>Add</Button>
                         </DialogActions>
                     </Dialog><Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={handleRemove}>Remove</Button>
 

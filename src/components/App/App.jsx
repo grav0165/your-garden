@@ -12,6 +12,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import Search from '../Search/Search';
 import PlantDetails from '../PlantDetails/PlantDetails';
+import UserGarden from '../UserGarden/UserGarden';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -80,6 +81,12 @@ function App() {
           path="/details"
           >
             <PlantDetails />
+          </ProtectedRoute>
+          <ProtectedRoute
+          exact
+          path="/yourgarden"
+          >
+            <UserGarden />
           </ProtectedRoute>
 
           <Route
