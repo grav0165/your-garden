@@ -5,6 +5,7 @@ const axios = require('axios');
 // Creating a router for userPlant database
 const userPlantRouter = express.Router();
 
+// GET route to obtain all of the user's plants in their garden
 userPlantRouter.get('/', (req, res) => {
     let sqlUserId = req.user.id;
     let sqlQuery = `
@@ -24,5 +25,30 @@ userPlantRouter.get('/', (req, res) => {
             res.sendStatus(500);
         })
 })
+
+// POST route to add a new plant to the user's garden
+userPlantRouter.post('/', (req, res) => {
+    let sqlUserId = req.user.id;
+    let sqlParams = req.body
+    let sqlValues = [
+        sqlUserId,
+        sqlParams.id,
+        sqlParams.watering
+    ]
+    let sqlQuery = `
+    INSERT INTO "user_plant" ("user_id", "plant_id", "water_date", "water_days")
+    VALUES ($1, $2, CURRENT_DATE, $3);
+    `
+    pool.query(sqlQuery, sqlValues)
+    .then( result => {
+        res.sendStatus(201);
+    })
+    .catch(error => {
+        console.log('Error in POST to user_plant query: ', error);
+        res.sendStatus(500)
+    })
+})
+
+
 
 module.exports = userPlantRouter;
