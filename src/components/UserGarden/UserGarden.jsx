@@ -55,7 +55,7 @@ function UserGarden() {
     return (
         <ThemeProvider theme={theme}>
         <div className="your-garden-main">
-            <Card sx={{ width: '90%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Card sx={{ width: '90%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2 }}>
                 <Typography variant="h4">
                     Welcome to your garden state of mind
                 </Typography>
