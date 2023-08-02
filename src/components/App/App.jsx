@@ -31,9 +31,19 @@ function App() {
 
   const user = useSelector(store => store.user);
 
+  const userPlants = () => {
+    dispatch({
+        type: 'FETCH_PLANT_USER'
+    })
+}
+
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
+
+  useEffect(() => {
+    userPlants();
+}, []);
 
   return (
     <Router>
@@ -150,6 +160,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    
   );
 }
 
