@@ -22,6 +22,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ToDo from '../ToDo/ToDo';
 
 import './App.css';
 
@@ -70,23 +71,33 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+
           <ProtectedRoute
           exact
           path="/search"
           >
             <Search />
           </ProtectedRoute>
+
           <ProtectedRoute
           exact
           path="/details"
           >
             <PlantDetails />
           </ProtectedRoute>
+
           <ProtectedRoute
           exact
           path="/yourgarden"
           >
             <UserGarden />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+          exact
+          path="/todo"
+          >
+            <ToDo />
           </ProtectedRoute>
 
           <Route

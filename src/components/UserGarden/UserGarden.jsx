@@ -63,8 +63,6 @@ function UserGarden() {
             <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 6, md: 12 }}>
                 {userPlantResult.map(plant => {
                     return (
-
-
                         <Grid xs={4} s={4} md={4} >
                             <Card
                                 key={plant?.id}
@@ -88,7 +86,6 @@ function UserGarden() {
                                 </CardActionArea>
                             </Card>
                         </Grid>
-
                     )
                 })}
             </Grid>

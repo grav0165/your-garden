@@ -35,8 +35,8 @@ function Nav() {
               Your Garden
             </Link>
 
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/todo">
+              To Do Page
             </Link>
 
             <LogOutButton className="navLink" />
