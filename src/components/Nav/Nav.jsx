@@ -31,6 +31,10 @@ function Nav() {
               Search
             </Link>
 
+            <Link className="navLink" to="/yourgarden">
+              Your Garden
+            </Link>
+
             <Link className="navLink" to="/info">
               Info Page
             </Link>

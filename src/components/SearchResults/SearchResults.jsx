@@ -40,9 +40,7 @@ function searchResults() {
 
     // API dispatch to call up details of a specific plant
     const handleDetails = (event, plant) => {
-        
         event.preventDefault();
-
         dispatch({
             type: 'SEARCH_API_DETAILS',
             payload: plant?.id
