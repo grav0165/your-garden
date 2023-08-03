@@ -31,18 +31,20 @@ function App() {
 
   const user = useSelector(store => store.user);
 
-  const userPlants = () => {
-    dispatch({
-        type: 'FETCH_PLANT_USER'
-    })
+  // Function to do two different dispatch calls
+  const dispatchCall = () => {
+    dispatch({ type: 'FETCH_PLANT_USER'})
+    dispatch({ type: 'GET_PLANT_LIST' });
 }
 
+  // Function related to logged in user call
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
+  // Dispatch call to get plant database and user garden database info
   useEffect(() => {
-    userPlants();
+    dispatchCall();
 }, []);
 
   return (
