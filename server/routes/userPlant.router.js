@@ -68,5 +68,22 @@ userPlantRouter.put('/watering/:id', (req, res) => {
     })
 })
 
+userPlantRouter.delete('/:id', (req, res) => {
+    let sqlId = req.params.id
+    let sqlUser = req.user.id
+    let sqlQuery =  `
+    DELETE FROM "user_plant" 
+    WHERE "id"=$1  AND "user_id"=$2;
+    `
+    pool.query(sqlQuery, [sqlId, sqlUser])
+    .then( result => {
+        res.sendStatus(201);
+    })
+    .catch( error => {
+        console.log('Error in PUT to user_plant query: ', error);
+        res.sendStatus(500)
+    })
+})
+
 
 module.exports = userPlantRouter;

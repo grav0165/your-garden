@@ -28,8 +28,9 @@ let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
 function PlantDetails() {
-    // State to handle opening and closing dialogue
+    // State to handle opening and closing dialogue for add
     const [open, setOpen] = useState(false);
+    // State to handle open and closing dialogue for remove
     // State to hold drop down input
     const [wateringInput, setWateringInput] = useState();
 
