@@ -68,6 +68,11 @@ function PlantDetails() {
         setOpenRemove(false);
     };
 
+    // Confirmed removed plant dialogue
+    const handleRemoveFromGarden = () => {
+        console.log('Remove from garden clicked')
+    }
+
     // handle return back to search results
     const handleReturn = () => {
         console.log('Return button clicked')
@@ -89,8 +94,6 @@ function PlantDetails() {
                 payload: plantDetails
             })
         }
-
-
     }
 
     //Button to remove plant from your garden, will keep plant details in plant chart
@@ -197,7 +200,34 @@ function PlantDetails() {
                             <Button size="large" variant="contained" onClick={handleCancel}>Cancel</Button>
                             <Button size="large" variant="contained" onClick={()=>handleAddToGarden(event, plantList, plantDetails)}>Add</Button>
                         </DialogActions>
-                    </Dialog><Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={()=>handleRemove}>Remove</Button>
+                    </Dialog>
+                    <Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={()=>handleRemove}>Remove</Button>
+                    <Dialog open={openRemove} onClose={handleClose}>
+                    <DialogTitle>How would you like to water</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                {plantDetails?.care?.[0]?.section?.[0]?.description}
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                        <TextField
+                                id="outlined-select-currency"
+                                select
+                                label="Select"
+                                defaultValue=""
+                                onChange={(event)=>setWateringInput(event.target.value)}
+                                sx={{ width: 175}}
+                            >
+                            {dropDown.map((option) => (
+                                <MenuItem key={option} value={option}>
+                                  {option}
+                                </MenuItem>
+                              ))}
+                              </TextField>
+                            <Button size="large" variant="contained" onClick={handleCancel}>Cancel</Button>
+                            <Button size="large" variant="contained" onClick={(event)=>handleRemoveFromGarden(event, plantList, plantDetails)}>Add</Button>
+                        </DialogActions>
+                    </Dialog>
 
                 </div>
             </div>
