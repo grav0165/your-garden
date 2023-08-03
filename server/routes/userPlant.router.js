@@ -36,7 +36,7 @@ userPlantRouter.post('/', (req, res) => {
         sqlParams.watering
     ]
     let sqlQuery = `
-    INSERT INTO "user_plant" ("user_id", "plant_id", "water_date", "water_days")
+    INSERT INTO "user_plant" ("user_id", "plant_id", "water_date", "water_days", "added_date")
     VALUES ($1, $2, CURRENT_DATE, $3);
     `
     pool.query(sqlQuery, sqlValues)
@@ -48,6 +48,8 @@ userPlantRouter.post('/', (req, res) => {
         res.sendStatus(500)
     })
 })
+
+// PUT route to update the given plants watering
 
 
 

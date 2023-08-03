@@ -41,8 +41,12 @@ function ToDo() {
         return image
     }
 
-    const handleDetail = () => {
+    const handleWateringUpdate = (plant) => {
         console.log('Detail clicked')
+        dispatch({
+            type: 'USER_WATER_UPDATE',
+            payload: plant?.id
+        })
     }
 
 
@@ -59,7 +63,7 @@ function ToDo() {
                         if (toDoDay(plant) > 0) {
                             return (
                                 <Grid xs={4} s={4} md={4}>
-                                    <CardActionArea>
+                                    <CardActionArea onClick={handleWateringUpdate}>
                                         <Card
                                             key={plant?.id}
                                             className="result-card"
