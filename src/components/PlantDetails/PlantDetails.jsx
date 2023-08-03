@@ -31,6 +31,7 @@ function PlantDetails() {
     // State to handle opening and closing dialogue for add
     const [open, setOpen] = useState(false);
     // State to handle open and closing dialogue for remove
+    const [openRemove, setOpenRemove] = useState(false);
     // State to hold drop down input
     const [wateringInput, setWateringInput] = useState();
 
@@ -47,14 +48,24 @@ function PlantDetails() {
     //Importing dispatch to make dispatch calls
     const dispatch = useDispatch();
 
-    // handle click open of dialogue
+    // handle click open of ADD dialogue
     const handleClickOpen = () => {
         setOpen(true);
     };
 
-    // handle click close of dialogue 
+    // handle click close of CLOSE dialogue 
     const handleClose = () => {
         setOpen(false);
+    };
+
+     // handle click open of REMOVE dialogue
+     const handleClickOpenRemove = () => {
+        setOpenRemove(true);
+    };
+
+    // handle click close of REMOVE dialogue 
+    const handleCloseRemove = () => {
+        setOpenRemove(false);
     };
 
     // handle return back to search results
@@ -84,6 +95,7 @@ function PlantDetails() {
 
     //Button to remove plant from your garden, will keep plant details in plant chart
     const handleRemove = () => {
+        handleClickOpenRemove();
         console.log('Remove button clicked')
     }
 
@@ -185,7 +197,7 @@ function PlantDetails() {
                             <Button size="large" variant="contained" onClick={handleCancel}>Cancel</Button>
                             <Button size="large" variant="contained" onClick={()=>handleAddToGarden(event, plantList, plantDetails)}>Add</Button>
                         </DialogActions>
-                    </Dialog><Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={handleRemove}>Remove</Button>
+                    </Dialog><Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={()=>handleRemove}>Remove</Button>
 
                 </div>
             </div>
