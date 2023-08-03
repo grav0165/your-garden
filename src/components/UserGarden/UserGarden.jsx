@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 // MUI components
 import Button from '@mui/material/Button';
@@ -18,6 +19,9 @@ function UserGarden() {
 
     // Adding dispatch to component
     const dispatch = useDispatch();
+    // Calling history to push into details page
+    const history = useHistory();
+
 
     // Store to hold the user's garden information imported
     let userPlantResult = useSelector(store => store.userPlantDatabase.userPlantDatabaseResponse)
@@ -30,9 +34,27 @@ function UserGarden() {
         })
     }
 
-    const handleDetails = () => {
-        console.log('Asking for database details')
+      // Creating a function to wait
+      const wait = (ms) => {
+        const start = Date.now();
+        let now = start;
+        while (now - start < ms) {
+          now = Date.now();
+        }
     }
+
+   // API dispatch to call up details of a specific plant
+   const handleDetails = (event, plant) => {
+    event.preventDefault();
+    dispatch({
+        type: 'SEARCH_API_DETAILS',
+        payload: plant?.api_id
+    })
+    // Wait before rendering next page to allow for API call to complete
+    wait(700);
+    history.push('/details')
+    }
+
 
     useEffect(() => {
         userPlants();
@@ -68,7 +90,7 @@ function UserGarden() {
                                 key={plant?.id}
                                 sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
                                 className="result-card">
-                                <CardActionArea onClick={handleDetails}>
+                                <CardActionArea onClick={()=>handleDetails(event, plant)}>
                                     <CardMedia
                                         component='img'
                                         height='240'
