@@ -1,6 +1,16 @@
 import { Difference } from "@mui/icons-material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
+import './ToDo.css'
+
+// importing MUI
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import CardActionArea from "@mui/material/CardActionArea";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 function ToDo() {
     // Adding dispatch to help with PUT requests
@@ -18,16 +28,120 @@ function ToDo() {
         return dateDifference
     }
 
+    // Created a variable thats conditional to avoid broken links
+    let image;
+    const plantImage = (plant) => {
+        if (plant?.image == null) {
+            image = "images/default.png";
+        } else if (plant?.image == "https://perenual.com/storage/image/upgrade_access.jpg") {
+            image = "images/default.png";
+        } else {
+            image = plant?.image;
+        }
+        return image
+    }
+
+    const handleDetail = () => {
+        console.log('Detail clicked')
+    }
+
 
 
 
 
 
     return (
-        <div>
+        <div className="to-do-page">
             <h3>To Do Today</h3>
-            <div>{toDoDay(userPlantList[0])}</div>
+            <div className="to-do-today">
+                <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 6, md: 12 }}>
+                    {userPlantList.map(plant => {
+                        if (toDoDay(plant) > 0) {
+                            return (
+                                <Grid xs={4} s={4} md={4}>
+                                    <CardActionArea>
+                                        <Card
+                                            key={plant?.id}
+                                            className="result-card"
+                                            sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                                        >
+                                            <CardMedia
+                                                component='img'
+                                                height='240'
+                                                image={plantImage(plant)}
+                                                alt={plant?.common_name}
+                                            />
+                                            <Typography>
+                                                {plant?.common_name}
+                                            </Typography>
+                                        </Card>
+                                    </CardActionArea>
+                                </Grid>
+                            )
+                        }
+                    })}
+                </Grid>
+            </div>
+            <div className="to-do-tomorrow">
+                <h3>To Do Tomorrow</h3>
+                <div className="to-do-tomorrow-cards">
+                    {userPlantList.map(plant => {
+                        if (-1 < toDoDay(plant)) {
+                            return (
+                                <Card
+                                    key={plant?.id}
+                                    className="result-card"
+                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                                >
+                                    <CardActionArea >
+                                        <CardMedia
+                                            component='img'
+                                            height='240'
+                                            image={plantImage(plant)}
+                                            alt={plant?.common_name}
+                                        />
+                                        <Typography>
+                                            {plant?.common_name}
+                                        </Typography>
+                                    </CardActionArea>
+                                </Card>
+                            )
+                        }
+                    })}
+            </div>
+            </div>
+            <div className="to-do-day-after">
+                <h3>To Do the Day After Tomorrow</h3>
+                <div className="to-do-tomorrow-cards">
+                    {userPlantList.map(plant => {
+                        if (-2 < toDoDay(plant)) {
+                            if (toDoDay(plant) > -1) {
+                                return (
+                                    <Card
+                                        key={plant?.id}
+                                        className="result-card"
+                                        sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                                    >
+                                        <CardActionArea >
+                                            <CardMedia
+                                                component='img'
+                                                height='240'
+                                                image={plantImage(plant)}
+                                                alt={plant?.common_name}
+                                            />
+                                            <Typography>
+                                                {plant?.common_name}
+                                            </Typography>
+                                        </CardActionArea>
+                                    </Card>
+                                )
+                            }
+                        }
+                    })}
+                </div>
+            </div>
         </div>
+
     )
 }
 
