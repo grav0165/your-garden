@@ -37,7 +37,7 @@ userPlantRouter.post('/', (req, res) => {
     ]
     let sqlQuery = `
     INSERT INTO "user_plant" ("user_id", "plant_id", "water_date", "water_days", "added_date")
-    VALUES ($1, $2, CURRENT_DATE, $3);
+    VALUES ($1, $2, CURRENT_DATE, $3, CURRENT_DATE);
     `
     pool.query(sqlQuery, sqlValues)
     .then( result => {
@@ -50,7 +50,23 @@ userPlantRouter.post('/', (req, res) => {
 })
 
 // PUT route to update the given plants watering
-
+userPlantRouter.put('/watering/:id', (req, res) => {
+    let sqlId = req.params.id
+    let sqlUser = req.user.id
+    let sqlQuery =  `
+    UPDATE "user_plant" 
+    SET "water_date"=CURRENT_DATE
+    WHERE "id" =$1  AND "user_id" =$2;
+    `
+    pool.query(sqlQuery, [sqlId, sqlUser])
+    .then( result => {
+        res.sendStatus(201);
+    })
+    .catch( error => {
+        console.log('Error in PUT to user_plant query: ', error);
+        res.sendStatus(500)
+    })
+})
 
 
 module.exports = userPlantRouter;
