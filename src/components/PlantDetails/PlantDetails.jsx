@@ -3,6 +3,9 @@ import moment from 'moment/moment';
 import { useSelector, useDispatch } from "react-redux";
 import './PlantDetails.css'
 
+// Spinner to give visual sign of loading
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+
 import { useHistory } from "react-router-dom";
 
 // importing in MUI components
@@ -51,6 +54,8 @@ function PlantDetails() {
     const plantList = useSelector(store => store.plantDatabase.plantDatabaseResponse)
     // Importing user Garden information
     const userPlantList = useSelector(store => store.userPlantDatabase.userPlantDatabaseResponse)
+    // Store that holds the status of the loading spinner boolean
+    const loadingSpinner = useSelector(store => store.loadingSpinner.loadingSpinner)
 
     // Importing history to use to push back to the search results
     const history = useHistory();
@@ -141,7 +146,9 @@ function PlantDetails() {
     }
 
 
-    return (
+    return loadingSpinner ? (
+        <LoadingSpinner /> 
+        ) : (
         <ThemeProvider theme={theme}>
             <div className="details-full-page">
                 <div className="details-main">
