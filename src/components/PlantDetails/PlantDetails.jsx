@@ -29,6 +29,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -84,7 +85,6 @@ function PlantDetails() {
             type: 'USER_REMOVE_PLANT',
             payload: plant?.id
         })
-        // handleCancel();
     }
 
     // handle return back to search results
@@ -210,7 +210,7 @@ function PlantDetails() {
                     </Dialog>
                     <Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={() => handleRemove(plantList, plantDetails)}>Remove</Button>
                     <Dialog open={openRemove} onClose={handleClose}>
-                        <DialogTitle>Removal of {plantDetails?.base?.common_name}</DialogTitle>
+                        <DialogTitle sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>Removal of {plantDetails?.base?.common_name}</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
                                 Are you sure you want to remove {plantDetails?.base?.common_name} from your garden? This cannot be undone.
@@ -237,13 +237,13 @@ function PlantDetails() {
                                             <TableCell component="th" scope="row">{plant?.common_name}</TableCell>
                                             {/* Moment is a dependency that allows you to easily format the date in a simple to consume way */}
                                             <TableCell>{moment(plant?.added_date).format("MMM Do YY")}</TableCell>
-                                            <TableCell align="right"><Button onClick={(event) => handleRemoveFromGarden(event, plant)}>Delete</Button></TableCell>
+                                            <TableCell align="right"><Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={(event) => handleRemoveFromGarden(event, plant)}>Delete</Button></TableCell>
                                         </TableRow>
                                     )}})}
                                 </TableBody>
                             </Table>
                         </TableContainer>
-                        <DialogActions>
+                        <DialogActions sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 1}}>
                             <Button size="large" variant="contained" onClick={handleCancel}>Return</Button>
                         </DialogActions>
                     </Dialog>
