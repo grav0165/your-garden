@@ -11,6 +11,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Box from "@mui/material/Box"
 
 function ToDo() {
     // Adding dispatch to help with PUT requests
@@ -57,11 +58,12 @@ function ToDo() {
         <div className="to-do-page">
             <h3>To Do Today</h3>
             <div className="to-do-today">
-                <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 6, md: 12 }}>
+                {/* <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 6, md: 12 }}> */}
+                <Box sx={{ width: '95%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflow: 'hidden', overflowY: 'scroll'}}>
                     {userPlantList.map(plant => {
                         if (toDoDay(plant) > 0) {
                             return (
-                                <Grid xs={4} s={4} md={4}>
+                                // <Grid xs={4} s={4} md={4}>
                                     <CardActionArea onClick={()=>handleWateringUpdate(plant)}>
                                         <Card
                                             key={plant?.id}
@@ -79,15 +81,17 @@ function ToDo() {
                                             </Typography>
                                         </Card>
                                     </CardActionArea>
-                                </Grid>
+                                // </Grid>
                             )
                         }
                     })}
-                </Grid>
+                    </Box>
+                {/* </Grid> */}
             </div>
             <div className="to-do-tomorrow">
                 <h3>To Do Tomorrow</h3>
                 <div className="to-do-tomorrow-cards">
+                <Box sx={{ width: '95%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflow: 'hidden', overflowX: 'scroll'}}>
                     {userPlantList.map(plant => {
                         if (-1 < toDoDay(plant)) {
                             return (
@@ -111,6 +115,7 @@ function ToDo() {
                             )
                         }
                     })}
+                </Box>
             </div>
             </div>
             <div className="to-do-day-after">
