@@ -61,7 +61,7 @@ function ToDo() {
         <div>
             <Container>
                 <h3>To Do Today</h3>
-                <Paper sx={{ display:'flex', flexDirection:'row', flexWrap: 'nowrap', overflowX: 'scroll' }}>
+                <Box sx={{ display:'flex', flexDirection:'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll'}}>
                 {userPlantList.map(plant => {
                     if (toDoDay(plant) > 0) {
                         return (
@@ -86,9 +86,9 @@ function ToDo() {
                         )
                     }
                 })}
-                </Paper>
-                <Paper sx={{ display:'flex', flexDirection:'row' }}>
+                </Box>
                 <h3>To Do Tomorrow</h3>
+                <Paper sx={{ display:'flex', flexDirection:'row' }}>
                 {userPlantList.map(plant => {
                     if (-1 < toDoDay(plant)) {
                         return (
@@ -113,8 +113,9 @@ function ToDo() {
                     }
                 })}
                 </Paper>
-                <Paper sx={{ display:'flex', flexDirection:'row' }}>
                 <h3>To Do the Day After Tomorrow</h3>
+                <Paper sx={{ display:'flex', flexDirection:'row' }}>
+
                 {userPlantList.map(plant => {
                     if (-2 < toDoDay(plant)) {
                         if (toDoDay(plant) > -1) {

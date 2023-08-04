@@ -28,7 +28,7 @@ function LandingPage() {
           </p>
 
           <p>
-            Simplified garden care is the mission statement
+            Simplifying garden care is the goal for any gardener. 
           </p>
 
         </div>
