@@ -1,3 +1,4 @@
+import { bool } from "prop-types";
 import { combineReducers } from "redux";
 
 // Spinner effect when loading
@@ -12,6 +13,4 @@ const loadingSpinner = (state = false, action) => {
     }
 }
 
-export default combineReducers({
-    loadingSpinner,
-})
+export default loadingSpinner
