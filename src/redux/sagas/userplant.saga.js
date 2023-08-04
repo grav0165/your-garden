@@ -21,9 +21,29 @@ function* fetchUserPlants(action) {
     }
 }
 
+function* userUpdateWater(action) {
+    try {
+        yield axios.put(`/userPlant/watering/${action.payload}`)
+        yield put({ type: 'FETCH_PLANT_USER'})
+    } catch (error) {
+        console.log('Error in SAGA PUT request: ', error)
+    }
+}
+
+function* userRemovePlant(action) {
+    try {
+        yield axios.delete(`/userPlant/${action.payload}`)
+        yield put({ type: 'FETCH_PLANT_USER'})
+    } catch (error) {
+        console.log('Error in SAGA DELETE request: ', error)
+    }
+}
+
 function* userPlantSaga() {
     yield takeLatest('ADD_PLANT_USER', addUserPlant);
     yield takeLatest('FETCH_PLANT_USER', fetchUserPlants);
+    yield takeLatest('USER_WATER_UPDATE', userUpdateWater);
+    yield takeLatest('USER_REMOVE_PLANT', userRemovePlant)
 }
 
 export default userPlantSaga

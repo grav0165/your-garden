@@ -1,6 +1,7 @@
 import React from "react";
 import './SearchResults.css';
 import { useDispatch } from "react-redux";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 
 
@@ -24,6 +25,9 @@ function searchResults() {
     
     // Store that holds all of the results from the API search
     let apiSearchResult = useSelector(store => store.api.apiSearchResponse)
+    // Store that holds the status of the loading spinner boolean
+    const loadingSpinner = useSelector(store => store.loadingSpinner.loadingSpinner)
+    console.log(loadingSpinner)
     // Calling in dispatch to use for Saga request
     const dispatch = useDispatch();
     // Calling history to push into details page
@@ -46,7 +50,7 @@ function searchResults() {
             payload: plant?.id
         })
         // Wait before rendering next page to allow for API call to complete
-        wait(700);
+        // wait(700);
         history.push('/details')
     }
 
@@ -66,9 +70,11 @@ function searchResults() {
 
 
 
-    return (
+    return loadingSpinner ? (
+        <LoadingSpinner /> 
+        ) : 
+        (
         <>
-            
                 <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
                     {apiSearchResult.map(plant => {

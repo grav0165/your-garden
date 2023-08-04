@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
+import moment from 'moment/moment';
 import { useSelector, useDispatch } from "react-redux";
 import './PlantDetails.css'
+
+// Spinner to give visual sign of loading
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 import { useHistory } from "react-router-dom";
 
@@ -23,13 +26,22 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import MenuItem from '@mui/material/MenuItem';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
 function PlantDetails() {
-    // State to handle opening and closing dialogue
+    // State to handle opening and closing dialogue for add
     const [open, setOpen] = useState(false);
+    // State to handle open and closing dialogue for remove
+    const [openRemove, setOpenRemove] = useState(false);
     // State to hold drop down input
     const [wateringInput, setWateringInput] = useState();
 
@@ -40,31 +52,51 @@ function PlantDetails() {
     const plantDetails = useSelector(store => store.api.apiDetailsResponse)
     //Importing reducer store of plant list to match ID's if the plant needs to be added from API database
     const plantList = useSelector(store => store.plantDatabase.plantDatabaseResponse)
+    // Importing user Garden information
+    const userPlantList = useSelector(store => store.userPlantDatabase.userPlantDatabaseResponse)
+    // Store that holds the status of the loading spinner boolean
+    const loadingSpinner = useSelector(store => store.loadingSpinner.loadingSpinner)
 
     // Importing history to use to push back to the search results
     const history = useHistory();
     //Importing dispatch to make dispatch calls
     const dispatch = useDispatch();
 
-    // handle click open of dialogue
+    // handle click open of ADD dialogue
     const handleClickOpen = () => {
         setOpen(true);
     };
 
-    // handle click close of dialogue 
+    // handle click close of CLOSE dialogue 
     const handleClose = () => {
         setOpen(false);
     };
+
+    // handle click open of REMOVE dialogue
+    const handleClickOpenRemove = () => {
+        setOpenRemove(true);
+    };
+
+    // handle click close of REMOVE dialogue 
+    const handleCloseRemove = () => {
+        setOpenRemove(false);
+    };
+
+    // Confirmed removed plant dialogue
+    const handleRemoveFromGarden = (event, plant) => {
+        event.preventDefault();
+        console.log('Remove from garden clicked with ID: ', plant?.id)
+        dispatch({
+            type: 'USER_REMOVE_PLANT',
+            payload: plant?.id
+        })
+    }
 
     // handle return back to search results
     const handleReturn = () => {
         console.log('Return button clicked')
         history.push('/search')
     }
-
-
-
-
 
     // Button to add will first add plant to the plant database, then ask for a watering prompt on popper window
     const handleAdd = (plantList, plantDetails) => {
@@ -77,12 +109,11 @@ function PlantDetails() {
                 payload: plantDetails
             })
         }
-
-
     }
 
     //Button to remove plant from your garden, will keep plant details in plant chart
-    const handleRemove = () => {
+    const handleRemove = (plantList, plantDetails) => {
+        handleClickOpenRemove();
         console.log('Remove button clicked')
     }
 
@@ -90,15 +121,16 @@ function PlantDetails() {
     const handleCancel = () => {
         console.log('Cancel adding to database');
         handleClose();
+        handleCloseRemove();
     }
 
     // button to handle add to the user's garden, will POST to database
     const handleAddToGarden = (event, plantList, plantDetails) => {
         event.preventDefault();
         console.log('Added to users database');
-        let idToAdd 
-        for(let i=0; i<plantList.length; i++) {
-            if(plantList[i].api_id == plantDetails?.base?.id) {
+        let idToAdd
+        for (let i = 0; i < plantList.length; i++) {
+            if (plantList[i].api_id == plantDetails?.base?.id) {
                 idToAdd = plantList[i].id
             }
         }
@@ -109,16 +141,14 @@ function PlantDetails() {
                 watering: wateringInput
             }
         })
-     
+
         handleClose();
     }
 
 
-    useEffect(() => {
-        dispatch({ type: 'GET_PLANT_LIST' })
-    }, [])
-
-    return (
+    return loadingSpinner ? (
+        <LoadingSpinner /> 
+        ) : (
         <ThemeProvider theme={theme}>
             <div className="details-full-page">
                 <div className="details-main">
@@ -167,24 +197,63 @@ function PlantDetails() {
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                        <TextField
+                            <TextField
                                 id="outlined-select-currency"
                                 select
                                 label="Select"
                                 defaultValue=""
-                                onChange={(event)=>setWateringInput(event.target.value)}
-                                sx={{ width: 175}}
+                                onChange={(event) => setWateringInput(event.target.value)}
+                                sx={{ width: 175 }}
                             >
-                            {dropDown.map((option) => (
-                                <MenuItem key={option} value={option}>
-                                  {option}
-                                </MenuItem>
-                              ))}
-                              </TextField>
+                                {dropDown.map((option) => (
+                                    <MenuItem key={option} value={option}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                             <Button size="large" variant="contained" onClick={handleCancel}>Cancel</Button>
-                            <Button size="large" variant="contained" onClick={()=>handleAddToGarden(event, plantList, plantDetails)}>Add</Button>
+                            <Button size="large" variant="contained" onClick={() => handleAddToGarden(event, plantList, plantDetails)}>Add</Button>
                         </DialogActions>
-                    </Dialog><Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={handleRemove}>Remove</Button>
+                    </Dialog>
+                    <Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={() => handleRemove(plantList, plantDetails)}>Remove</Button>
+                    <Dialog open={openRemove} onClose={handleClose}>
+                        <DialogTitle sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>Removal of {plantDetails?.base?.common_name}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Are you sure you want to remove {plantDetails?.base?.common_name} from your garden? This cannot be undone.
+                            </DialogContentText>
+                        </DialogContent>
+                        <TableContainer>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Plant</TableCell>
+                                        <TableCell>Added Date</TableCell>
+                                        <TableCell></TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {userPlantList.map(plant => {
+                                        if (plant?.api_id == plantDetails?.base?.id) {
+
+                                    return (
+                                        <TableRow
+                                            key={plant?.id}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row">{plant?.common_name}</TableCell>
+                                            {/* Moment is a dependency that allows you to easily format the date in a simple to consume way */}
+                                            <TableCell>{moment(plant?.added_date).format("MMM Do YY")}</TableCell>
+                                            <TableCell align="right"><Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={(event) => handleRemoveFromGarden(event, plant)}>Delete</Button></TableCell>
+                                        </TableRow>
+                                    )}})}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <DialogActions sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 1}}>
+                            <Button size="large" variant="contained" onClick={handleCancel}>Return</Button>
+                        </DialogActions>
+                    </Dialog>
 
                 </div>
             </div>

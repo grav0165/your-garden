@@ -3,7 +3,8 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import api from './api.reducer';
 import plantDatabase from './plantdatabase.reducer';
-import userPlantDatabase from './userPlants.reducer'
+import userPlantDatabase from './userPlants.reducer';
+import loadingSpinner from './loadingSpinner.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   api,
   plantDatabase,
-  userPlantDatabase
+  userPlantDatabase,
+  loadingSpinner
 });
 
 export default rootReducer;

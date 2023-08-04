@@ -22,6 +22,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ToDo from '../ToDo/ToDo';
 
 import './App.css';
 
@@ -30,9 +31,21 @@ function App() {
 
   const user = useSelector(store => store.user);
 
+  // Function to do two different dispatch calls
+  const dispatchCall = () => {
+    dispatch({ type: 'FETCH_PLANT_USER'})
+    dispatch({ type: 'GET_PLANT_LIST' });
+}
+
+  // Function related to logged in user call
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
+
+  // Dispatch call to get plant database and user garden database info
+  useEffect(() => {
+    dispatchCall();
+}, []);
 
   return (
     <Router>
@@ -70,23 +83,33 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+
           <ProtectedRoute
           exact
           path="/search"
           >
             <Search />
           </ProtectedRoute>
+
           <ProtectedRoute
           exact
           path="/details"
           >
             <PlantDetails />
           </ProtectedRoute>
+
           <ProtectedRoute
           exact
           path="/yourgarden"
           >
             <UserGarden />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+          exact
+          path="/todo"
+          >
+            <ToDo />
           </ProtectedRoute>
 
           <Route
@@ -139,6 +162,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    
   );
 }
 
