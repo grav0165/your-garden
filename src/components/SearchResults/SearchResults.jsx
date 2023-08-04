@@ -26,7 +26,7 @@ function searchResults() {
     // Store that holds all of the results from the API search
     let apiSearchResult = useSelector(store => store.api.apiSearchResponse)
     // Store that holds the status of the loading spinner boolean
-    const loadingSpinner = useSelector(store => store.loadingSpinner.loadingSpinner)
+    const loadingSpinner = useSelector(store => store.loadingSpinner)
     console.log(loadingSpinner)
     // Calling in dispatch to use for Saga request
     const dispatch = useDispatch();

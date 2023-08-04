@@ -1,28 +1,8 @@
-.to-do-today {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .to-do-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
-}
+    margin-left: 1em;
+    margin-right: 1em;
 
-.to-do-tomorrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.to-do-tomorrow-cards {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-}
-
-.result-card {
-    flex: 0 0 auto;
 }

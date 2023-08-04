@@ -11,6 +11,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Box from "@mui/material/Box"
+import Paper from "@mui/material/Paper"
+import Container from "@mui/material/Container";
 
 function ToDo() {
     // Adding dispatch to help with PUT requests
@@ -54,42 +57,68 @@ function ToDo() {
 
 
     return (
-        <div className="to-do-page">
-            <h3>To Do Today</h3>
-            <div className="to-do-today">
-                <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 6, md: 12 }}>
-                    {userPlantList.map(plant => {
-                        if (toDoDay(plant) > 0) {
-                            return (
-                                <Grid xs={4} s={4} md={4}>
-                                    <CardActionArea onClick={()=>handleWateringUpdate(plant)}>
-                                        <Card
-                                            key={plant?.id}
-                                            className="result-card"
-                                            sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
-                                        >
-                                            <CardMedia
-                                                component='img'
-                                                height='240'
-                                                image={plantImage(plant)}
-                                                alt={plant?.common_name}
-                                            />
-                                            <Typography>
-                                                {plant?.common_name}
-                                            </Typography>
-                                        </Card>
-                                    </CardActionArea>
-                                </Grid>
-                            )
-                        }
-                    })}
-                </Grid>
-            </div>
-            <div className="to-do-tomorrow">
+
+        <div>
+            <Container>
+                <h3>To Do Today</h3>
+                <Box sx={{ display:'flex', flexDirection:'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll'}}>
+                {userPlantList.map(plant => {
+                    if (toDoDay(plant) > 0) {
+                        return (
+                            <CardActionArea onClick={() => handleWateringUpdate(plant)}>
+                                <Card
+                                    key={plant?.id}
+                                    className="result-card"
+                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                                >
+                                    <CardMedia
+                                        component='img'
+                                        height='240'
+                                        image={plantImage(plant)}
+                                        alt={plant?.common_name}
+                                    />
+                                    <Typography>
+                                        {plant?.common_name}
+                                    </Typography>
+                                </Card>
+                            </CardActionArea>
+
+                        )
+                    }
+                })}
+                </Box>
                 <h3>To Do Tomorrow</h3>
-                <div className="to-do-tomorrow-cards">
-                    {userPlantList.map(plant => {
-                        if (-1 < toDoDay(plant)) {
+                <Paper sx={{ display:'flex', flexDirection:'row' }}>
+                {userPlantList.map(plant => {
+                    if (-1 < toDoDay(plant)) {
+                        return (
+                            <Card
+                                key={plant?.id}
+                                className="result-card"
+                                sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                            >
+                                <CardActionArea >
+                                    <CardMedia
+                                        component='img'
+                                        height='240'
+                                        image={plantImage(plant)}
+                                        alt={plant?.common_name}
+                                    />
+                                    <Typography>
+                                        {plant?.common_name}
+                                    </Typography>
+                                </CardActionArea>
+                            </Card>
+                        )
+                    }
+                })}
+                </Paper>
+                <h3>To Do the Day After Tomorrow</h3>
+                <Paper sx={{ display:'flex', flexDirection:'row' }}>
+
+                {userPlantList.map(plant => {
+                    if (-2 < toDoDay(plant)) {
+                        if (toDoDay(plant) > -1) {
                             return (
                                 <Card
                                     key={plant?.id}
@@ -110,39 +139,10 @@ function ToDo() {
                                 </Card>
                             )
                         }
-                    })}
-            </div>
-            </div>
-            <div className="to-do-day-after">
-                <h3>To Do the Day After Tomorrow</h3>
-                <div className="to-do-tomorrow-cards">
-                    {userPlantList.map(plant => {
-                        if (-2 < toDoDay(plant)) {
-                            if (toDoDay(plant) > -1) {
-                                return (
-                                    <Card
-                                        key={plant?.id}
-                                        className="result-card"
-                                        sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
-                                    >
-                                        <CardActionArea >
-                                            <CardMedia
-                                                component='img'
-                                                height='240'
-                                                image={plantImage(plant)}
-                                                alt={plant?.common_name}
-                                            />
-                                            <Typography>
-                                                {plant?.common_name}
-                                            </Typography>
-                                        </CardActionArea>
-                                    </Card>
-                                )
-                            }
-                        }
-                    })}
-                </div>
-            </div>
+                    }
+                })}
+                </Paper>
+            </Container>
         </div>
 
     )

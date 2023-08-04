@@ -6,7 +6,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 // This API request asks for detailed information from a specific ID
 function* fetchApiDetails (action) {
     try {
-        yield put({ type: 'SHOW_SPINNER '})
+        yield put({ type: 'SHOW_SPINNER'})
         const perenualResponse = yield axios.get(`/api/perenual/details/${action.payload}`)
         const perenualDetailResponse = yield axios.get(`/api/perenual/careDetails/${action.payload}`)
         yield put({ type: 'SET_API_DETAILS_RESULT', payload: {base: perenualResponse.data, care: perenualDetailResponse.data.data}})
@@ -19,7 +19,7 @@ function* fetchApiDetails (action) {
 // Creating a second API call to use the LIST API search type
 function* fetchApiSearch (action) {
     try {
-        yield put({ type: 'SHOW_SPINNER '})
+        yield put({ type: 'SHOW_SPINNER'})
         const perenualSearchResponse = yield axios.get(`/api/perenual/search/${action.payload}`)
         yield put ({ type: 'SET_API_RESULT', payload: perenualSearchResponse.data.data })
         yield put({ type: 'HIDE_SPINNER'})
