@@ -195,7 +195,7 @@ function PlantDetails() {
                     <Card elevation={5} sx={{ display: 'flex', flexDirection: 'row' }}>
                         <Box sx={{ padding: 4 }}>
                             <Typography>
-                                <ChangeCircleIcon /> Cycle: {plantDetails?.base?.cycle}
+                                <ChangeCircleIcon /> Cycle: {plantDetails?.base?.cycle ? plantDetails?.base?.cycle : 'Unknown'}
                             </Typography>
                             <Typography>
                                 <HouseIcon /> Indoors: {plantDetails?.base?.indoor ? "Yes" : "No"}
@@ -207,16 +207,16 @@ function PlantDetails() {
 
                         <Box sx={{ padding: 4 }}>
                             <Typography>
-                                <WaterDropIcon /> Watering: {plantDetails?.base?.watering}
+                                <WaterDropIcon /> Watering: {plantDetails?.base?.watering ? plantDetails?.base?.watering : 'Unknown'}
                             </Typography>
                             <Typography>
                                 <WbSunnyIcon /> Sun: {plantDetails?.base?.sunlight[0] ? plantDetails?.base?.sunlight[0] : 'Unknown'}
                             </Typography>
                             <Typography>
-                                <HourglassTopIcon /> Maintenance: {plantDetails?.base?.maintenance}
+                                <HourglassTopIcon /> Maintenance: {plantDetails?.base?.maintenance ? plantDetails?.base?.maintenance : 'Unknown'}
                             </Typography>
                             <Typography>
-                                <GrassIcon /> Growth Rate: {plantDetails?.base?.growth_rate}
+                                <GrassIcon /> Growth Rate: {plantDetails?.base?.growth_rate ? plantDetails?.base?.growth_rate : 'Unknown'}
                             </Typography>
                         </Box>
                     </Card>
