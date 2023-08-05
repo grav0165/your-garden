@@ -26,10 +26,10 @@ plantRouter.post('/', (req, res)=> {
     sqlValues = [
         plant.base.id,
         plant.base.common_name,
-        plant.base.scientific_name,
+        plant.base.scientific_name[0],
         plant.base.cycle,
         plant.base.indoor,
-        plant.base.soil,
+        plant.base.soil[0],
         plant.base.growth_rate,
         plant.base.watering, 
         plant.base.maintenance,
