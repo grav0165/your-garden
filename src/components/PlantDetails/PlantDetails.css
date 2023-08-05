@@ -13,3 +13,13 @@
 .interaction-buttons {
     margin: 30px;
 }
+
+.additional-details {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.add-remove-buttons {
+    margin: 40px;
+}

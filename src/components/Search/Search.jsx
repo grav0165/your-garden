@@ -44,12 +44,13 @@ function Search() {
     return (
         <div className='search-page'>
             <div className='search-form'>
-                <Card elevation={8} sx={{width:'90%', padding: 3}}>
+                <Card elevation={8} sx={{width:'90%', padding: 3, display: 'flex', gap: 1}}>
                     <TextField
                         id="filled-basic"
                         label="Search for a Plant"
                         onChange={(event) => setPlantInput(event.target.value)}
-                    /> <Button onClick={(event) => handleSearchApi(event)}>Submit</Button>
+                        sx={{ width: 300}}
+                    /> <Button variant="text" onClick={(event) => handleSearchApi(event)}>Search</Button>
                 </Card>
             </div>
             <div className='search-results'>

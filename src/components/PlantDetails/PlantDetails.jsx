@@ -33,6 +33,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Paper from '@mui/material/Paper'
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import HouseIcon from '@mui/icons-material/House';
+import GrassIcon from '@mui/icons-material/Grass';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -55,7 +63,7 @@ function PlantDetails() {
     // Importing user Garden information
     const userPlantList = useSelector(store => store.userPlantDatabase.userPlantDatabaseResponse)
     // Store that holds the status of the loading spinner boolean
-    const loadingSpinner = useSelector(store => store.loadingSpinner.loadingSpinner)
+    const loadingSpinner = useSelector(store => store.loadingSpinner)
 
     // Importing history to use to push back to the search results
     const history = useHistory();
@@ -147,8 +155,8 @@ function PlantDetails() {
 
 
     return loadingSpinner ? (
-        <LoadingSpinner /> 
-        ) : (
+        <LoadingSpinner />
+    ) : (
         <ThemeProvider theme={theme}>
             <div className="details-full-page">
                 <div className="details-main">
@@ -182,42 +190,41 @@ function PlantDetails() {
                 </div>
                 <div className="interaction-buttons">
                     <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={handleReturn} startIcon={<SkipPreviousIcon />}>Return</Button>
-                    <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={() => console.log('object is: ', plantDetails)}>Details</Button>
                 </div>
                 <div className="additional-details">
-                    <h4>Additional Plant Details Here</h4>
+                    <Card elevation={5} sx={{ display: 'flex', flexDirection: 'row' }}>
+                        <Box sx={{ padding: 4 }}>
+                            <Typography>
+                                <ChangeCircleIcon /> Cycle: {plantDetails?.base?.cycle ? plantDetails?.base?.cycle : 'Unknown'}
+                            </Typography>
+                            <Typography>
+                                <HouseIcon /> Indoors: {plantDetails?.base?.indoor ? "Yes" : "No"}
+                            </Typography>
+                            <Typography>
+                                <AgricultureIcon /> Soil type: {plantDetails?.base?.soil[0] ? plantDetails?.base?.soil : 'Unknown'}
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ padding: 4 }}>
+                            <Typography>
+                                <WaterDropIcon /> Watering: {plantDetails?.base?.watering ? plantDetails?.base?.watering : 'Unknown'}
+                            </Typography>
+                            <Typography>
+                                <WbSunnyIcon /> Sun: {plantDetails?.base?.sunlight[0] ? plantDetails?.base?.sunlight[0] : 'Unknown'}
+                            </Typography>
+                            <Typography>
+                                <HourglassTopIcon /> Maintenance: {plantDetails?.base?.maintenance ? plantDetails?.base?.maintenance : 'Unknown'}
+                            </Typography>
+                            <Typography>
+                                <GrassIcon /> Growth Rate: {plantDetails?.base?.growth_rate ? plantDetails?.base?.growth_rate : 'Unknown'}
+                            </Typography>
+                        </Box>
+                    </Card>
                 </div>
                 <div className="add-remove-buttons">
-                    <Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={() => handleAdd(plantList, plantDetails)}>Add</Button>
-                    <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>How would you like to water</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                {plantDetails?.care?.[0]?.section?.[0]?.description}
-                            </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <TextField
-                                id="outlined-select-currency"
-                                select
-                                label="Select"
-                                defaultValue=""
-                                onChange={(event) => setWateringInput(event.target.value)}
-                                sx={{ width: 175 }}
-                            >
-                                {dropDown.map((option) => (
-                                    <MenuItem key={option} value={option}>
-                                        {option}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                            <Button size="large" variant="contained" onClick={handleCancel}>Cancel</Button>
-                            <Button size="large" variant="contained" onClick={() => handleAddToGarden(event, plantList, plantDetails)}>Add</Button>
-                        </DialogActions>
-                    </Dialog>
-                    <Button size="large" variant="contianed" elevation={5} sx={{ margin: 1 }} onClick={() => handleRemove(plantList, plantDetails)}>Remove</Button>
-                    <Dialog open={openRemove} onClose={handleClose}>
-                        <DialogTitle sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>Removal of {plantDetails?.base?.common_name}</DialogTitle>
+                <Button size="large" variant="contained" color="error" elevation={5} sx={{ margin: 1 }} onClick={() => handleRemove(plantList, plantDetails)}>Remove</Button>
+                    <Dialog open={openRemove} onClose={handleClose} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <DialogTitle sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>Removal of {plantDetails?.base?.common_name}</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
                                 Are you sure you want to remove {plantDetails?.base?.common_name} from your garden? This cannot be undone.
@@ -236,25 +243,57 @@ function PlantDetails() {
                                     {userPlantList.map(plant => {
                                         if (plant?.api_id == plantDetails?.base?.id) {
 
-                                    return (
-                                        <TableRow
-                                            key={plant?.id}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                            <TableCell component="th" scope="row">{plant?.common_name}</TableCell>
-                                            {/* Moment is a dependency that allows you to easily format the date in a simple to consume way */}
-                                            <TableCell>{moment(plant?.added_date).format("MMM Do YY")}</TableCell>
-                                            <TableCell align="right"><Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={(event) => handleRemoveFromGarden(event, plant)}>Delete</Button></TableCell>
-                                        </TableRow>
-                                    )}})}
+                                            return (
+                                                <TableRow
+                                                    key={plant?.id}
+                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row">{plant?.common_name}</TableCell>
+                                                    {/* Moment is a dependency that allows you to easily format the date in a simple to consume way */}
+                                                    <TableCell>{moment(plant?.added_date).format("MMM Do YY")}</TableCell>
+                                                    <TableCell align="right"><Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={(event) => handleRemoveFromGarden(event, plant)}>Delete</Button></TableCell>
+                                                </TableRow>
+                                            )
+                                        }
+                                    })}
                                 </TableBody>
                             </Table>
                         </TableContainer>
-                        <DialogActions sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 1}}>
+                        <DialogActions sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 1 }}>
                             <Button size="large" variant="contained" onClick={handleCancel}>Return</Button>
                         </DialogActions>
                     </Dialog>
 
+                    <Button size="large" variant="contained" color="success" elevation={5} sx={{ margin: 1 }} onClick={() => handleAdd(plantList, plantDetails)}>Add</Button>
+                    <Dialog open={open} onClose={handleClose} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <DialogTitle>How would you like to water</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                {plantDetails?.care?.[0]?.section?.[0]?.description}
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <TextField
+                                id="outlined-select-currency"
+                                select
+                                label="Select"
+                                defaultValue=""
+                                onChange={(event) => setWateringInput(event.target.value)}
+                                sx={{ width: 175 }}
+                            >
+                                {dropDown.map((option) => (
+                                    <MenuItem key={option} value={option}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <DialogActions>
+                                <Button size="large" variant="contained" color="error" onClick={handleCancel}>Cancel</Button>
+                                <Button size="large" variant="contained" color="success" onClick={() => handleAddToGarden(event, plantList, plantDetails)}>Add</Button>
+                            </DialogActions>
+                        </DialogActions>
+                    </Dialog>
+                    
                 </div>
             </div>
         </ThemeProvider>
