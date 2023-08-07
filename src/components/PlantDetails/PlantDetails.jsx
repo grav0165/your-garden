@@ -192,6 +192,7 @@ function PlantDetails() {
                     <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={handleReturn} startIcon={<SkipPreviousIcon />}>Return</Button>
                 </div>
                 <div className="additional-details">
+                    <div className='mini-map'>
                     <Card elevation={5} sx={{ display: 'flex', flexDirection: 'row' }}>
                         <Box sx={{ padding: 4 }}>
                             <Typography>
@@ -220,11 +221,17 @@ function PlantDetails() {
                             </Typography>
                         </Box>
                     </Card>
-                    <Card elevation={5}>
-                        <Typography>
-                            {plantDetails?.care?.[1]?.description}
+                    </div>
+                    <div className='sunlight-description'>
+                    <Card elevation={5} sx={{padding: 4}}>
+                        <Typography sx={{ display: 'flex', flexDirection: 'row' }}>
+                            Sunlight suggestions:
+                        </Typography>
+                        <Typography sx={{ display: 'flex', flexDirection: 'row', width: 350 }}>
+                            {plantDetails?.care?.[0]?.section?.[1]?.description}
                         </Typography>
                     </Card>
+                    </div>
                 </div>
                 <div className="add-remove-buttons">
                 <Button size="large" variant="contained" color="error" elevation={5} sx={{ margin: 1 }} onClick={() => handleRemove(plantList, plantDetails)}>Remove</Button>
