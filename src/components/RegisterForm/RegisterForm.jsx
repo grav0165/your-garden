@@ -25,7 +25,7 @@ function RegisterForm() {
 
   return (
     <div className='register-box'>
-      <Card sx={{ padding: 2, height: 400, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Card sx={{ padding: 2, height: 400, width: 290, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         <div className='register-top'>
         <Typography>
           <h2>Register User</h2>
