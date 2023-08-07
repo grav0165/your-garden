@@ -80,14 +80,15 @@ function UserGarden() {
 
         } else {
             pageContent =
-                <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 6, md: 12 }}>
+                <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 3, sm: 4, md: 8 }} sx={{ width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                     {userPlantResult.map(plant => {
                         return (
                             <Grid >
                                 <Card
                                     key={plant?.id}
-                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
-                                    className="result-card">
+                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 1, padding: 2, paddingBottom: 3 }}
+                                    className="result-card"
+                                    >
                                     <CardActionArea onClick={() => handleDetails(event, plant)}>
                                         <CardMedia
                                             component='img'
