@@ -26,6 +26,7 @@ import ToDo from '../ToDo/ToDo';
 import Home from '../Home/Home';
 
 import './App.css';
+import { Lan } from '@mui/icons-material';
 
 function App() {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/main" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -142,13 +143,19 @@ function App() {
               <RegisterPage />
             }
           </Route>
-
           <Route
+            path='/landingpage'
+          >
+            <LandingPage />
+          </Route>
+
+          <ProtectedRoute
             exact
             path="/home"
           >
             <Home />
-          </Route>
+          </ProtectedRoute>
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

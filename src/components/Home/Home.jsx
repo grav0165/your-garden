@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import './Home.css'
 import Search from "../Search/Search";
@@ -55,14 +55,29 @@ const theme = createTheme({
 });
 
 
+
+
 function Home() {
 
+    const dispatch = useDispatch();
     // Importing user reducer to greet a new user to the page
     const user = useSelector(store => store.user)
     // Importing users garden database
     const userPlant = useSelector(store => store.userPlantDatabase.userPlantDatabaseResponse)
     // Importing useHistory to push user to another page
     const history = useHistory();
+
+      // Function to do two different dispatch calls
+  const dispatchCall = () => {
+    dispatch({ type: 'FETCH_PLANT_USER'})
+    dispatch({ type: 'GET_PLANT_LIST' });
+}
+
+  // Dispatch call to get plant database and user garden database info
+  useEffect(() => {
+    dispatchCall();
+}, []);
+
 
     // Code that looks at current date, matches against database date 
     const toDoDay = (plant) => {

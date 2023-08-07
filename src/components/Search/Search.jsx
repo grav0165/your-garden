@@ -63,7 +63,9 @@ function Search() {
                             onChange={(event) => setPlantInput(event.target.value)}
                             sx={{ width: 300 }}
                             color="success"
-                        /> <Button variant="text" color="success" onClick={(event) => handleSearchApi(event)}>Search</Button>
+                            required
+                        /> 
+                        <Button variant="text" color="success" onClick={(event) => handleSearchApi(event)}>Search</Button>
                     </Card>
                 </div>
                 <div className='search-results'>

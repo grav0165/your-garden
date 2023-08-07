@@ -15,20 +15,25 @@ function LandingPage() {
 
   return (
     <div className="container">
+      <div className='video-wrapper'>
+        <video id="background-video" autoplay loop muted>
+          <source src="./video/flower.mp4" type="video/mp4" />
+      </video>
+      </div>
       <h2>{heading}</h2>
 
       <div className="grid">
         <div className="grid-col grid-col_8">
           <p>
-            Nurturing your own garden can bring peace of mind and happiness as each 
+            Nurturing your own garden can bring peace of mind and happiness as each
             blooms and becomes a gorgeous display of nature. However, many beginners
-            and enthusiasts have trouble keeping track of the watering patterns for 
-            each plant. Wanting to turn a black thumb to a green thumb, Your Garden 
+            and enthusiasts have trouble keeping track of the watering patterns for
+            each plant. Wanting to turn a black thumb to a green thumb, Your Garden
             was created to reduce the amount of effort it takes to manage a garden.
           </p>
 
           <p>
-            Simplifying garden care is the goal for any gardener. 
+            Simplifying garden care is the goal for any gardener.
           </p>
 
         </div>
