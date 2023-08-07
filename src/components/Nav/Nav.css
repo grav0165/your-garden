@@ -16,11 +16,22 @@
   border-radius: 50%;
 }
 
-.logo-name {
+.page-logo {
   display: flex;
   flex-direction: row;
 }
 
+.flower-icon {
+  border-radius: 50%;
+
+}
+
+.logo-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
 
 .nav a {
   text-decoration: none;

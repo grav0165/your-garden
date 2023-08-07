@@ -44,11 +44,13 @@ function ToDo() {
         return image
     }
 
-    const handleWateringUpdate = (plant) => {
-        dispatch({
-            type: 'USER_WATER_UPDATE',
-            payload: plant?.id
-        })
+    const handleWateringUpdate = ( plant) => {
+        toDoDay(plant)
+        console.log('days left calc: ', toDoDay(plant))
+        // dispatch({
+        //     type: 'USER_WATER_UPDATE',
+        //     payload: plant?.id
+        // })
     }
 
 
@@ -69,7 +71,7 @@ function ToDo() {
                                 <Card
                                     key={plant?.id}
                                     className="result-card"
-                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, margin: 3, padding: 2, paddingBottom: 3 }}
                                 >
                                     <CardMedia
                                         component='img'
@@ -88,16 +90,17 @@ function ToDo() {
                 })}
                 </Box>
                 <h3>To Do Tomorrow</h3>
-                <Paper sx={{ display:'flex', flexDirection:'row' }}>
+                <Box sx={{ display:'flex', flexDirection:'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll'}}>
                 {userPlantList.map(plant => {
                     if (-1 < toDoDay(plant)) {
+                        if (toDoDay(plant) < 0) {
                         return (
-                            <Card
-                                key={plant?.id}
-                                className="result-card"
-                                sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
-                            >
-                                <CardActionArea >
+                            <CardActionArea onClick={() => handleWateringUpdate(plant)}>
+                                <Card
+                                    key={plant?.id}
+                                    className="result-card"
+                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
+                                >
                                     <CardMedia
                                         component='img'
                                         height='240'
@@ -107,12 +110,13 @@ function ToDo() {
                                     <Typography>
                                         {plant?.common_name}
                                     </Typography>
-                                </CardActionArea>
-                            </Card>
+                                </Card>
+                            </CardActionArea>
+
                         )
-                    }
+                    }}
                 })}
-                </Paper>
+                </Box>
                 <h3>To Do the Day After Tomorrow</h3>
                 <Paper sx={{ display:'flex', flexDirection:'row' }}>
 
