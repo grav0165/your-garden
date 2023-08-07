@@ -9,6 +9,8 @@
   overflow: hidden;
   top: 0;
   width: 100%;
+  position: sticky;
+  z-index: 999;
 }
 
 .flower-pic {
