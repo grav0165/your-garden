@@ -23,6 +23,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ToDo from '../ToDo/ToDo';
+import Home from '../Home/Home';
 
 import './App.css';
 
@@ -144,14 +145,7 @@ function App() {
             exact
             path="/home"
           >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
-              :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
+            <Home />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
