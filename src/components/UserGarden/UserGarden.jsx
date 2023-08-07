@@ -13,8 +13,35 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { responsiveFontSizes, createTheme, ThemeProvider } from "@mui/material/styles";
 
-let theme = createTheme();
-theme = responsiveFontSizes(theme);
+// MUI theme information 
+// let theme = createTheme();
+// theme = responsiveFontSizes(theme);
+let theme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: {
+            main: '#a0c49d',
+        },
+        secondary: {
+            main: '#c4d7b2',
+        },
+        background: {
+            paper: '#a0c49d',
+            default: '#e1ecc8',
+        },
+        error: {
+            main: '#e06469',
+        },
+        warning: {
+            main: '#f2b6a0',
+        },
+        info: {
+            main: '#dedea7',
+        },
+    },
+    
+}, );
+theme = responsiveFontSizes(theme)
 
 function UserGarden() {
 
@@ -36,6 +63,8 @@ function UserGarden() {
             now = Date.now();
         }
     }
+
+    
 
     // Use Effect on page load to obtain users plant information
     useEffect(() => {
@@ -88,6 +117,7 @@ function UserGarden() {
                                     key={plant?.id}
                                     sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 1, padding: 2, paddingBottom: 3 }}
                                     className="result-card"
+                                    elevation={5}
                                     >
                                     <CardActionArea onClick={() => handleDetails(event, plant)}>
                                         <CardMedia
@@ -120,7 +150,7 @@ function UserGarden() {
     return (
         <ThemeProvider theme={theme}>
             <div className="your-garden-main">
-                <Card sx={{ width: '90%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2 }}>
+                <Card elevation={5} sx={{ width: '90%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2, marginBottom: 5}}>
                     <Typography variant="h4">
                         Welcome to your garden state of mind
                     </Typography>

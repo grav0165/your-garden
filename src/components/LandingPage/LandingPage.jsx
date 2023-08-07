@@ -53,7 +53,7 @@ function LandingPage() {
         </video>
       </div>
       <div className='content'>
-        <Paper sx={{ backgroundColor: 'rgba(60, 80, 60, 0.5)', marginBottom: 10, display: 'flex', padding: 2 }} className='landing-paper'>
+        <Paper sx={{ backgroundColor: 'rgba(60, 80, 60, 0.6)', marginBottom: 10, display: 'flex', padding: 2 }} className='landing-paper'>
           <div className='mission-statement'>
             <Typography sx={{color: 'white'}}>
               Nurturing your own garden can bring peace of mind and happiness as each

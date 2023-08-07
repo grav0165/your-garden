@@ -8,7 +8,7 @@ function RegisterPage() {
   const history = useHistory();
 
   return (
-    <div className='container-register'>
+    <div className='container'>
       <div className='video-wrapper'>
         <video id="background-video" autoPlay muted loop={true}>
           <source src="./video/flower.mp4" type="video/mp4" />
@@ -20,7 +20,7 @@ function RegisterPage() {
       <center>
         <button
           type="button"
-          className="btn btn_asLink"
+          className="btn btn_asLink login-button"
           onClick={() => {
             history.push('/login');
           }}

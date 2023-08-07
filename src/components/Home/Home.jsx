@@ -122,7 +122,7 @@ function Home() {
                                         <Card
                                             key={plant?.id}
                                             className="result-card"
-                                            sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', margin: 3, paddingBottom: 2, objectFit: 'fill' }}
+                                            sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: 3, paddingBottom: 2, objectFit: 'fill' }}
                                         >
                                             <CardMedia
                                                 component='img'
@@ -133,7 +133,7 @@ function Home() {
                                                 sx={{objectFit: 'fill'}}
 
                                             />
-                                            <Typography sx={{ display: 'flex', flexDirection: 'column', position: 'absolute', color: 'white' }}>
+                                            <Typography elevation={8} sx={{ display: 'flex', flexDirection: 'column', position: 'absolute', color: 'white' }}>
                                                 {plant?.common_name}
                                             </Typography>
                                         </Card>

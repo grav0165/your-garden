@@ -27,15 +27,6 @@ function Search() {
     const [plantInput, setPlantInput] = useState('')
 
 
-
-    // Temporary details on click button
-    const handleDetails = () => {
-        console.log('Clicked details button')
-        dispatch({
-            type: 'SEARCH_API'
-        })
-    }
-
     // Search through API request
     const handleSearchApi = (event) => {
         event.preventDefault();
@@ -50,7 +41,7 @@ function Search() {
 
             <div className='search-page'>
                 <div className='search-form'>
-                    <Card elevation={8} sx={{ width: '90%', padding: 3, display: 'flex', gap: 1 }}>
+                    <Card elevation={8} sx={{ width: '90%', padding: 3, display: 'flex', gap: 1, marginBottom: 3 }}>
                         <TextField
                             id="filled-basic"
                             variant='filled'

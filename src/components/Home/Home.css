@@ -1,6 +1,7 @@
 .mini-todo-box {
     display: flex;
     justify-content: center;
+    margin-top: 4em;
 }
 
 .welcome-message {
@@ -9,5 +10,5 @@
 }
 
 .search-bar {
-    margin-top: 2em;
+    margin-top: 4em;
 }
