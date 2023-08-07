@@ -53,7 +53,7 @@ function RegisterForm() {
   return (
     <div className='register-box'>
       <ThemeProvider theme={theme}>
-      <Card sx={{ padding: 2, height: 400, width: 290, display: 'flex', flexDirection: 'column' }}>
+      <Card sx={{ padding: 2, height: 400, width: 290, display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(160, 196, 157, 0.9)' }}>
         <div className='register-top'>
         <Typography>
           <h2>Register User</h2>
@@ -85,7 +85,7 @@ function RegisterForm() {
         />
         </div>
         <div className='button'>
-          <Button color='success' onClick={registerUser}>Register</Button>
+          <Button color='success' sx={{marginTop: 2}} onClick={registerUser}>Register</Button>
         </div>
       </Card>
       </ThemeProvider>

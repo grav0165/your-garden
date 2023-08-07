@@ -55,20 +55,20 @@ function LandingPage() {
       <div className='content'>
         <Paper sx={{ backgroundColor: 'rgba(60, 80, 60, 0.5)', marginBottom: 10, display: 'flex', padding: 2 }} className='landing-paper'>
           <div className='mission-statement'>
-            <Typography>
+            <Typography sx={{color: 'white'}}>
               Nurturing your own garden can bring peace of mind and happiness as each
               blooms and becomes a gorgeous display of nature. However, many beginners
               and enthusiasts have trouble keeping track of the watering patterns for
               each plant. Wanting to turn a black thumb to a green thumb, Your Garden
               was created to reduce the amount of effort it takes to manage a garden.
             </Typography>
-            <Typography sx={{marginTop: 2}}>
+            <Typography sx={{marginTop: 2, color: 'white'}}>
               Simplifying garden care is the goal for any gardener. Your Garden is 
               setting out to make researching your next plant simple, streamline
               the process of remembering which plants to water, and give you a clear 
               picture of your weekly tasks that bring your happiness.
             </Typography>
-            <Typography sx={{marginTop: 2}}>
+            <Typography sx={{marginTop: 2, color: 'white'}}>
               Welcome to Your Garden <LocalFloristIcon fontSize='small' />
             </Typography>
           </div>
