@@ -16,6 +16,9 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Box from "@mui/material/Box"
 import Paper from "@mui/material/Paper"
 import Container from "@mui/material/Container";
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
+
 
 // Testing image layout
 import ImageList from '@mui/material/ImageList';
@@ -25,6 +28,31 @@ import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 
+
+const theme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: {
+            main: '#a0c49d',
+        },
+        secondary: {
+            main: '#c4d7b2',
+        },
+        background: {
+            paper: '#a0c49d',
+            default: '#e1ecc8',
+        },
+        error: {
+            main: '#e06469',
+        },
+        warning: {
+            main: '#f2b6a0',
+        },
+        info: {
+            main: '#dedea7',
+        },
+    },
+});
 
 
 function Home() {
@@ -65,45 +93,46 @@ function Home() {
 
 
     return (
-        <div className="home-page">
-            <div className="welcome-message">
-                <h1> Welcome home, {user.username}</h1>
-            </div>
-            <div className="mini-todo-box">
-                <Paper sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '95%', justifyContent: 'flex-start', alignItems: 'center', padding: 1 }}>
-                    {userPlant.map(plant => {
-                        if (toDoDay(plant) > 0) {
-                            return (
-                                <CardActionArea onClick={handleToDo}>
-                                    <Card
-                                        key={plant?.id}
-                                        className="result-card"
-                                        sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', margin: 3, padding: 2, paddingBottom: 2 }}
-                                    >
-                                        <CardMedia
-                                            component='img'
-                                            height='240'
-                                            image={plantImage(plant)}
-                                            alt={plant?.common_name}
-                                            
-                                        />
-                                        <Typography sx={{ display: 'flex', flexDirection: 'column', position: 'absolute', color: 'white' }}>
-                                            {plant?.common_name}
-                                        </Typography>
-                                    </Card>
-                                </CardActionArea>
+        <ThemeProvider theme={theme}>
+            <div className="home-page">
+                <div className="welcome-message">
+                    <h1> Welcome home, {user.username}</h1>
+                </div>
+                <div className="mini-todo-box">
+                    <Paper elevation={5} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '90%', justifyContent: 'flex-start', alignItems: 'center', padding: 1 }}>
+                        {userPlant.map(plant => {
+                            if (toDoDay(plant) > 0) {
+                                return (
+                                    <CardActionArea onClick={handleToDo}>
+                                        <Card
+                                            key={plant?.id}
+                                            className="result-card"
+                                            sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', margin: 3, padding: 2, paddingBottom: 2 }}
+                                        >
+                                            <CardMedia
+                                                component='img'
+                                                height='240'
+                                                image={plantImage(plant)}
+                                                alt={plant?.common_name}
 
-                            )
-                        }
-                    })}
-                </Paper>
-            </div>
-            <div className="search-bar">
-                <Search />
+                                            />
+                                            <Typography sx={{ display: 'flex', flexDirection: 'column', position: 'absolute', color: 'white' }}>
+                                                {plant?.common_name}
+                                            </Typography>
+                                        </Card>
+                                    </CardActionArea>
 
-            </div>
-        </div>
+                                )
+                            }
+                        })}
+                    </Paper>
+                </div>
+                <div className="search-bar">
+                    <Search />
 
+                </div>
+            </div>
+        </ThemeProvider>
     )
 
 }

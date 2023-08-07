@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import './UserGarden.css'
 
 // MUI components
 import Button from '@mui/material/Button';
@@ -27,13 +28,6 @@ function UserGarden() {
     let userPlantResult = useSelector(store => store.userPlantDatabase.userPlantDatabaseResponse)
     console.log('user plant result call: ', userPlantResult)
 
-    // function to grab all user submitted plants in garden
-    const userPlants = () => {
-        dispatch({
-            type: 'FETCH_PLANT_USER'
-        })
-    }
-
     // Creating a function to wait
     const wait = (ms) => {
         const start = Date.now();
@@ -42,6 +36,11 @@ function UserGarden() {
             now = Date.now();
         }
     }
+
+    // Use Effect on page load to obtain users plant information
+    useEffect(() => {
+        dispatch({ type: 'FETCH_PLANT_USER' })
+    }, [])
 
     // API dispatch to call up details of a specific plant
     const handleDetails = (event, plant) => {
@@ -55,10 +54,6 @@ function UserGarden() {
         history.push('/details')
     }
 
-
-    useEffect(() => {
-        userPlants();
-    }, []);
 
     // created a variable that's conditional to avoid broken image links
     let image;
@@ -76,7 +71,7 @@ function UserGarden() {
 
     let pageContent;
     const plantContentReview = (userPlantResult) => {
-        if (!userPlantResult) {
+        if (userPlantResult.length == 0) {
             pageContent =
                 <div>
                     <h2> Nothing in your garden yet. </h2>
@@ -88,7 +83,7 @@ function UserGarden() {
                 <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 6, md: 12 }}>
                     {userPlantResult.map(plant => {
                         return (
-                            <Grid xs={4} s={4} md={4} >
+                            <Grid >
                                 <Card
                                     key={plant?.id}
                                     sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
@@ -100,14 +95,16 @@ function UserGarden() {
                                             image={plantImage(plant)}
                                             alt={plant?.common_name}
                                         />
-                                        <Typography>
-                                            {plant?.common_name}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary">
-                                            {plant?.scientific_name}
-                                        </Typography>
+                                        <div className="card-name">
+                                            <Typography>
+                                                {plant?.common_name}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2"
+                                                color="text.secondary">
+                                                {plant?.scientific_name}
+                                            </Typography>
+                                        </div>
                                     </CardActionArea>
                                 </Card>
                             </Grid>
@@ -128,6 +125,12 @@ function UserGarden() {
                     </Typography>
                 </Card>
                 {plantContentReview(userPlantResult)}
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                
             </div>
         </ThemeProvider>
     )
