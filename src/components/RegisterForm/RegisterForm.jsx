@@ -4,6 +4,33 @@ import './RegisterForm.css'
 
 // MUI components
 import { Card, TextField, Typography, Button } from '@mui/material';
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
+
+const theme = createTheme({
+  palette: {
+      mode: 'light',
+      primary: {
+          main: '#a0c49d',
+      },
+      secondary: {
+          main: '#c4d7b2',
+      },
+      background: {
+          paper: '#a0c49d',
+          default: '#e1ecc8',
+      },
+      error: {
+          main: '#e06469',
+      },
+      warning: {
+          main: '#f2b6a0',
+      },
+      info: {
+          main: '#dedea7',
+      },
+  },
+});
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -25,7 +52,8 @@ function RegisterForm() {
 
   return (
     <div className='register-box'>
-      <Card sx={{ padding: 2, height: 400, width: 290, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <ThemeProvider theme={theme}>
+      <Card sx={{ padding: 2, height: 400, width: 290, display: 'flex', flexDirection: 'column' }}>
         <div className='register-top'>
         <Typography>
           <h2>Register User</h2>
@@ -41,6 +69,7 @@ function RegisterForm() {
           label="username"
           value={username}
           required
+          color="success"
           onChange={(event) => setUsername(event.target.value)}
           sx={{ marginBottom: 2 }}
         />
@@ -50,14 +79,16 @@ function RegisterForm() {
           label="password"
           type="password"
           value={password}
+          color='success'
           required
           onChange={(event) => setPassword(event.target.value)}
         />
         </div>
         <div className='button'>
-          <Button onClick={registerUser}>Register</Button>
+          <Button color='success' onClick={registerUser}>Register</Button>
         </div>
       </Card>
+      </ThemeProvider>
     </div>
   );
 

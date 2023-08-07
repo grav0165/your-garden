@@ -2,11 +2,40 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 import { Button, Paper, Typography } from '@mui/material';
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
 import GrassIcon from '@mui/icons-material/Grass';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+
+// Theme for MUI
+const theme = createTheme({
+  palette: {
+      mode: 'light',
+      primary: {
+          main: '#a0c49d',
+      },
+      secondary: {
+          main: '#c4d7b2',
+      },
+      background: {
+          paper: '#a0c49d',
+          default: '#e1ecc8',
+      },
+      error: {
+          main: '#e06469',
+      },
+      warning: {
+          main: '#f2b6a0',
+      },
+      info: {
+          main: '#dedea7',
+      },
+  },
+});
+
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome');
