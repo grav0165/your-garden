@@ -220,6 +220,11 @@ function PlantDetails() {
                             </Typography>
                         </Box>
                     </Card>
+                    <Card elevation={5}>
+                        <Typography>
+                            {plantDetails?.care?.[1]?.description}
+                        </Typography>
+                    </Card>
                 </div>
                 <div className="add-remove-buttons">
                 <Button size="large" variant="contained" color="error" elevation={5} sx={{ margin: 1 }} onClick={() => handleRemove(plantList, plantDetails)}>Remove</Button>
