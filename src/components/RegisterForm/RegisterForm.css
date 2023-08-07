@@ -1,0 +1,4 @@
+.register-box {
+    display: flex;
+    flex-direction: column;
+}

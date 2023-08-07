@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import './RegisterForm.css'
+
+// MUI components
+import { Card, TextField, Typography, Button } from '@mui/material';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -20,42 +24,43 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
-    </form>
+    <div className='register-box'>
+      <Card sx={{ padding: 2, height: 400, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div className='register-top'>
+        <Typography>
+          <h2>Register User</h2>
+          {errors.registrationMessage && (
+            <h3 className="alert" role="alert">
+              {errors.registrationMessage}
+            </h3>
+          )}
+        </Typography>
+        <TextField
+          id="filled-basic"
+          variant="filled"
+          label="username"
+          value={username}
+          required
+          onChange={(event) => setUsername(event.target.value)}
+          sx={{ marginBottom: 2 }}
+        />
+        <TextField
+          id="filled-basic"
+          variant="filled"
+          label="password"
+          type="password"
+          value={password}
+          required
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        </div>
+        <div className='button'>
+          <Button onClick={registerUser}>Register</Button>
+        </div>
+      </Card>
+    </div>
   );
+
 }
 
 export default RegisterForm;

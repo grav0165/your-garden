@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
+import { Button } from '@mui/material';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
@@ -16,10 +17,11 @@ function LandingPage() {
   return (
     <div className="container">
       <div className='video-wrapper'>
-        <video id="background-video" autoplay loop muted>
+        <video id="background-video"  autoPlay muted loop={true}>
           <source src="./video/flower.mp4" type="video/mp4" />
-      </video>
+        </video>
       </div>
+      <div className='content'>
       <h2>{heading}</h2>
 
       <div className="grid">
@@ -42,11 +44,10 @@ function LandingPage() {
 
           <center>
             <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
+            <Button className="btn btn_sizeSm" variant="contained" color="success" onClick={onLogin}>Login</Button>
           </center>
         </div>
+      </div>
       </div>
     </div>
   );
