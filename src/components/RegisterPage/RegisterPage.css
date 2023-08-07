@@ -1,0 +1,21 @@
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0.5;
+  }
+
+  .content-register {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+  }
+
+  .login-button {
+    margin-top: 2em;
+    color: white;
+  }

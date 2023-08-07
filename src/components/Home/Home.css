@@ -1,0 +1,14 @@
+.mini-todo-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 4em;
+}
+
+.welcome-message {
+    display: flex;
+    margin-left: 1.5em;
+}
+
+.search-bar {
+    margin-top: 4em;
+}

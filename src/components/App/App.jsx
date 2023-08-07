@@ -23,8 +23,10 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ToDo from '../ToDo/ToDo';
+import Home from '../Home/Home';
 
 import './App.css';
+import { Lan } from '@mui/icons-material';
 
 function App() {
   const dispatch = useDispatch();
@@ -47,13 +49,15 @@ function App() {
     dispatchCall();
 }, []);
 
+
+
   return (
     <Router>
       <div>
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/landingpage" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -119,7 +123,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/home" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -139,20 +143,19 @@ function App() {
               <RegisterPage />
             }
           </Route>
-
           <Route
+            path='/landingpage'
+          >
+            <LandingPage />
+          </Route>
+
+          <ProtectedRoute
             exact
             path="/home"
           >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
-              :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
-          </Route>
+            <Home />
+          </ProtectedRoute>
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

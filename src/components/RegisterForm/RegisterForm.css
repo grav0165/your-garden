@@ -1,0 +1,9 @@
+.register-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-top {
+    display: flex;
+    flex-direction: column;
+}

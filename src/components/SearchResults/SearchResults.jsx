@@ -13,6 +13,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Box from "@mui/material/Box"
 
 
 // importing store 
@@ -22,7 +23,7 @@ import { useHistory } from "react-router-dom";
 
 
 function searchResults() {
-    
+
     // Store that holds all of the results from the API search
     let apiSearchResult = useSelector(store => store.api.apiSearchResponse)
     // Store that holds the status of the loading spinner boolean
@@ -59,10 +60,10 @@ function searchResults() {
 
 
     return loadingSpinner ? (
-        <LoadingSpinner /> 
-        ) : 
+        <LoadingSpinner />
+    ) :
         (
-        <>
+            <>
                 <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
                     {apiSearchResult.map(plant => {
@@ -80,14 +81,16 @@ function searchResults() {
                                             image={plantImage(plant)}
                                             alt={plant?.common_name}
                                         />
-                                        <Typography>
-                                            {plant?.common_name}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary">
-                                            {plant?.scientific_name}
-                                        </Typography>
+                                        <div className="card-name">
+                                            <Typography>
+                                                {plant?.common_name}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2"
+                                                color="text.secondary">
+                                                {plant?.scientific_name}
+                                            </Typography>
+                                        </div>
                                     </CardActionArea>
                                 </Card>
 
@@ -97,10 +100,14 @@ function searchResults() {
                     })}
 
                 </Grid>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+            </>
 
-        </>
-
-    )
+        )
 
 }
 
