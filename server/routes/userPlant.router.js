@@ -1,12 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const axios = require('axios');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware')
 
 // Creating a router for userPlant database
 const userPlantRouter = express.Router();
 
 // GET route to obtain all of the user's plants in their garden
-userPlantRouter.get('/', (req, res) => {
+userPlantRouter.get('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
     let sqlQuery = `
     SELECT "user_plant"."id", "user_plant"."plant_id", "user_plant"."added_date", "plant_table"."common_name", "plant_table"."scientific_name", "plant_table"."cycle", "plant_table"."indoors", "plant_table"."soil", "plant_table"."growth_rate", "plant_table"."watering", "plant_table"."maintenance", "plant_table"."sun", "plant_table"."image", "plant_table"."description", "plant_table"."watering_description", "plant_table"."sunlight_description", "user_plant"."water_date", "user_plant"."water_days", "plant_table"."api_id" 
@@ -27,7 +28,7 @@ userPlantRouter.get('/', (req, res) => {
 })
 
 // POST route to add a new plant to the user's garden
-userPlantRouter.post('/', (req, res) => {
+userPlantRouter.post('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
     let sqlParams = req.body
     let sqlValues = [
@@ -50,7 +51,7 @@ userPlantRouter.post('/', (req, res) => {
 })
 
 // PUT route to update the given plants watering
-userPlantRouter.put('/watering/:id', (req, res) => {
+userPlantRouter.put('/watering/:id', rejectUnauthenticated, (req, res) => {
     let sqlId = req.params.id
     let sqlUser = req.user.id
     let sqlQuery =  `
@@ -68,7 +69,7 @@ userPlantRouter.put('/watering/:id', (req, res) => {
     })
 })
 
-userPlantRouter.delete('/:id', (req, res) => {
+userPlantRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
     let sqlId = req.params.id
     let sqlUser = req.user.id
     let sqlQuery =  `
