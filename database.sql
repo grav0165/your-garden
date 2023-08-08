@@ -11,20 +11,20 @@ CREATE TABLE "user" (
 
 CREATE TABLE "plant_table" (
 	"id" SERIAL PRIMARY KEY,
-	"api_id" integer NOT NULL,
-	"common_name" varchar(80) NOT NULL,
-	"scientific_name" varchar(120) NOT NULL,
-	"cycle" varchar(20) NOT NULL,
-	"indoors" BOOLEAN NOT NULL,
-	"soil" varchar(60) NOT NULL,
-	"growth_rate" varchar(20) NOT NULL,
-	"watering" varchar(60) NOT NULL,
-	"maintenance" varchar(80) NOT NULL,
-	"sun" varchar(100) NOT NULL,
-	"image" varchar(120) NOT NULL,
-	"description" varchar(1000) NOT NULL,
-	"watering_description" varchar(1000) NOT NULL,
-	"sunlight_description" varchar(1000) NOT NULL,
+	"api_id" integer,
+	"common_name" varchar(80),
+	"scientific_name" varchar(120) ,
+	"cycle" varchar(20),
+	"indoors" BOOLEAN,
+	"soil" varchar(60),
+	"growth_rate" varchar(20),
+	"watering" varchar(60),
+	"maintenance" varchar(80),
+	"sun" varchar(100),
+	"image" varchar(2000),
+	"description" varchar(1000),
+	"watering_description" varchar(1000),
+	"sunlight_description" varchar(1000)
 );
 
 
@@ -36,5 +36,6 @@ CREATE TABLE "user_plant" (
 	"plant_id" integer NOT NULL,
 	"water_date" DATE NOT NULL,
 	"water_days" integer NOT NULL,
+	"added_date" DATE NOT NULL
 );
 

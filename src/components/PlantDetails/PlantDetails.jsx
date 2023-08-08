@@ -41,6 +41,8 @@ import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import HouseIcon from '@mui/icons-material/House';
 import GrassIcon from '@mui/icons-material/Grass';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
+import FormHelperText from '@mui/material/FormHelperText';
+import { FormControl } from '@mui/material';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -192,37 +194,49 @@ function PlantDetails() {
                     <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={handleReturn} startIcon={<SkipPreviousIcon />}>Return</Button>
                 </div>
                 <div className="additional-details">
-                    <Card elevation={5} sx={{ display: 'flex', flexDirection: 'row' }}>
-                        <Box sx={{ padding: 4 }}>
-                            <Typography>
-                                <ChangeCircleIcon /> Cycle: {plantDetails?.base?.cycle ? plantDetails?.base?.cycle : 'Unknown'}
-                            </Typography>
-                            <Typography>
-                                <HouseIcon /> Indoors: {plantDetails?.base?.indoor ? "Yes" : "No"}
-                            </Typography>
-                            <Typography>
-                                <AgricultureIcon /> Soil type: {plantDetails?.base?.soil[0] ? plantDetails?.base?.soil : 'Unknown'}
-                            </Typography>
-                        </Box>
+                    <div className='mini-map'>
+                        <Card elevation={5} sx={{ display: 'flex', flexDirection: 'row' }}>
+                            <Box sx={{ padding: 4 }}>
+                                <Typography>
+                                    <ChangeCircleIcon /> Cycle: {plantDetails?.base?.cycle ? plantDetails?.base?.cycle : 'Unknown'}
+                                </Typography>
+                                <Typography>
+                                    <HouseIcon /> Indoors: {plantDetails?.base?.indoor ? "Yes" : "No"}
+                                </Typography>
+                                <Typography>
+                                    <AgricultureIcon /> Soil type: {plantDetails?.base?.soil[0] ? plantDetails?.base?.soil : 'Unknown'}
+                                </Typography>
+                            </Box>
 
-                        <Box sx={{ padding: 4 }}>
-                            <Typography>
-                                <WaterDropIcon /> Watering: {plantDetails?.base?.watering ? plantDetails?.base?.watering : 'Unknown'}
+                            <Box sx={{ padding: 4 }}>
+                                <Typography>
+                                    <WaterDropIcon /> Watering: {plantDetails?.base?.watering ? plantDetails?.base?.watering : 'Unknown'}
+                                </Typography>
+                                <Typography>
+                                    <WbSunnyIcon /> Sun: {plantDetails?.base?.sunlight[0] ? plantDetails?.base?.sunlight[0] : 'Unknown'}
+                                </Typography>
+                                <Typography>
+                                    <HourglassTopIcon /> Maintenance: {plantDetails?.base?.maintenance ? plantDetails?.base?.maintenance : 'Unknown'}
+                                </Typography>
+                                <Typography>
+                                    <GrassIcon /> Growth Rate: {plantDetails?.base?.growth_rate ? plantDetails?.base?.growth_rate : 'Unknown'}
+                                </Typography>
+                            </Box>
+                        </Card>
+                    </div>
+                    <div className='sunlight-description'>
+                        <Card elevation={5} sx={{ padding: 4 }}>
+                            <Typography sx={{ display: 'flex', flexDirection: 'row' }}>
+                                Sunlight suggestions:
                             </Typography>
-                            <Typography>
-                                <WbSunnyIcon /> Sun: {plantDetails?.base?.sunlight[0] ? plantDetails?.base?.sunlight[0] : 'Unknown'}
+                            <Typography sx={{ display: 'flex', flexDirection: 'row', width: 350 }}>
+                                {plantDetails?.care?.[0]?.section?.[1]?.description}
                             </Typography>
-                            <Typography>
-                                <HourglassTopIcon /> Maintenance: {plantDetails?.base?.maintenance ? plantDetails?.base?.maintenance : 'Unknown'}
-                            </Typography>
-                            <Typography>
-                                <GrassIcon /> Growth Rate: {plantDetails?.base?.growth_rate ? plantDetails?.base?.growth_rate : 'Unknown'}
-                            </Typography>
-                        </Box>
-                    </Card>
+                        </Card>
+                    </div>
                 </div>
                 <div className="add-remove-buttons">
-                <Button size="large" variant="contained" color="error" elevation={5} sx={{ margin: 1 }} onClick={() => handleRemove(plantList, plantDetails)}>Remove</Button>
+                    <Button size="large" variant="contained" color="error" elevation={5} sx={{ margin: 1 }} onClick={() => handleRemove(plantList, plantDetails)}>Remove</Button>
                     <Dialog open={openRemove} onClose={handleClose} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <DialogTitle sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>Removal of {plantDetails?.base?.common_name}</DialogTitle>
                         <DialogContent>
@@ -273,27 +287,32 @@ function PlantDetails() {
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <TextField
-                                id="outlined-select-currency"
-                                select
-                                label="Select"
-                                defaultValue=""
-                                onChange={(event) => setWateringInput(event.target.value)}
-                                sx={{ width: 175 }}
-                            >
-                                {dropDown.map((option) => (
-                                    <MenuItem key={option} value={option}>
-                                        {option}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                            <FormControl variant="filled" size="small">
+                                <TextField
+                                    id="outlined-select-currency"
+                                    select
+                                    label="Select Frequency"
+                                    defaultValue=""
+                                    onChange={(event) => setWateringInput(event.target.value)}
+                                    sx={{ width: 175 }}
+                                >
+                                    {dropDown.map((option) => (
+                                        <MenuItem key={option} value={option}>
+                                            {option}
+                                        </MenuItem>
+
+                                    ))}
+
+                                </TextField>
+                            </FormControl>
+                            <FormHelperText>How often would you like to water?</FormHelperText>
                             <DialogActions>
                                 <Button size="large" variant="contained" color="error" onClick={handleCancel}>Cancel</Button>
                                 <Button size="large" variant="contained" color="success" onClick={() => handleAddToGarden(event, plantList, plantDetails)}>Add</Button>
                             </DialogActions>
                         </DialogActions>
                     </Dialog>
-                    
+
                 </div>
             </div>
         </ThemeProvider>

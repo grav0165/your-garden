@@ -45,12 +45,10 @@ function ToDo() {
     }
 
     const handleWateringUpdate = (plant) => {
-        toDoDay(plant)
-        console.log('days left calc: ', toDoDay(plant))
-        // dispatch({
-        //     type: 'USER_WATER_UPDATE',
-        //     payload: plant?.id
-        // })
+        dispatch({
+            type: 'USER_WATER_UPDATE',
+            payload: plant?.id
+        })
     }
 
 

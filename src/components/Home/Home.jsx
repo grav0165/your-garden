@@ -122,6 +122,7 @@ function Home() {
                                         <Card
                                             key={plant?.id}
                                             className="result-card"
+                                            elevation={5}
                                             sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: 3, paddingBottom: 2, objectFit: 'fill' }}
                                         >
                                             <CardMedia
