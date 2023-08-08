@@ -1,11 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const axios = require('axios')
+const { rejectUnauthenticated } = require('../modules/authentication-middleware')
 
 // Creating router for plant database
 const plantRouter = express.Router();
 
-plantRouter.get('/', (req, res) => {
+plantRouter.get('/', rejectUnauthenticated, (req, res) => {
     sqlQuery=`
     SELECT *
     FROM "plant_table"`
@@ -20,7 +21,7 @@ plantRouter.get('/', (req, res) => {
     })
 })
 
-plantRouter.post('/', (req, res)=> {
+plantRouter.post('/', rejectUnauthenticated, (req, res)=> {
     console.log('POST request sent to the server')
     plant = req.body
     sqlValues = [
