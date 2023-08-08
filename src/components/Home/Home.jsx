@@ -113,8 +113,13 @@ function Home() {
                 <div className="welcome-message">
                     <h1> Welcome home, {user.username}</h1>
                 </div>
+                <div className="to-do-statement">
+                    <Typography variant="secondary.text">
+                        this is what we need to take care of today
+                    </Typography>
+                </div>
                 <div className="mini-todo-box">
-                    <Paper elevation={5} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '90%', justifyContent: 'flex-start', alignItems: 'center', padding: 1 }}>
+                    <Paper elevation={5} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '90%', justifyContent: 'flex-start', alignItems: 'center', padding: 2 }}>
                         {userPlant.map(plant => {
                             if (toDoDay(plant) > 0) {
                                 return (
@@ -123,7 +128,7 @@ function Home() {
                                             key={plant?.id}
                                             className="result-card"
                                             elevation={5}
-                                            sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: 3, paddingBottom: 2, objectFit: 'fill' }}
+                                            sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: 1, paddingBottom: 2, objectFit: 'fill' }}
                                         >
                                             <CardMedia
                                                 component='img'

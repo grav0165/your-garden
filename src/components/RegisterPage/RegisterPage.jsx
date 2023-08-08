@@ -18,15 +18,7 @@ function RegisterPage() {
       <RegisterForm />
 
       <center>
-        <button
-          type="button"
-          className="btn btn_asLink login-button"
-          onClick={() => {
-            history.push('/login');
-          }}
-        >
-          Login
-        </button>
+        
       </center>
       </div>
     </div>
