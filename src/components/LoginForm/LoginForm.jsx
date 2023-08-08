@@ -79,7 +79,7 @@ function LoginForm() {
                 required
                 color="success"
                 onChange={(event) => setUsername(event.target.value)}
-                sx={{ marginBottom: 2 }}
+                sx={{ marginBottom: 2, width: '100%' }}
               />
               <TextField
                 id="filled-basic"
@@ -90,6 +90,7 @@ function LoginForm() {
                 color='success'
                 required
                 onChange={(event) => setPassword(event.target.value)}
+                sx={{width: '100%' }}
               />
             </div>
             <div className='button'>
@@ -98,7 +99,6 @@ function LoginForm() {
           </div>
           <div className='register-button-div'>
             <Button
-              className="btn btn_asLink register-button"
               color='success'
               onClick={() => {
                 history.push('/registration');
