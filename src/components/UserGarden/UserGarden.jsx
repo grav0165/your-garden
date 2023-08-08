@@ -131,7 +131,7 @@ function UserGarden() {
                                                 {plant?.common_name}
                                             </Typography>
                                             <Typography
-                                                variant="body2"
+                                                variant="caption"
                                                 color="text.secondary">
                                                 {plant?.scientific_name}
                                             </Typography>

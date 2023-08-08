@@ -20,15 +20,6 @@ import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 
 
-// Testing image layout
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
-
-
 const theme = createTheme({
     palette: {
         mode: 'light',
