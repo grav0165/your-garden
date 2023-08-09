@@ -1,0 +1,14 @@
+.user-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-part {
+    display: flex;
+    flex-direction: row;
+}
+
+.info-part-1 {
+    margin-right: 1.5em;
+}

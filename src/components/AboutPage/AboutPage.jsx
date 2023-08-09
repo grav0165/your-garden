@@ -75,6 +75,9 @@ function AboutPage() {
                 <Typography>
                   - Material UI
                 </Typography>
+                <Typography>
+                 - <a href="https://perenual.com/">Perenual API</a>
+                </Typography>
               </Card>
               <Card sx={{ height: 330, width: 400, display: 'flex', flexDirection: 'column' }}>
                 <img src="./images/linkedin.JPG" />

@@ -97,6 +97,7 @@ function ToDo() {
                                             <Card
                                                 key={plant?.id}
                                                 className="result-card"
+                                                elevation={5}
                                                 sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
                                             >
                                                 <CardMedia
@@ -105,12 +106,14 @@ function ToDo() {
                                                     image={plantImage(plant)}
                                                     alt={plant?.common_name}
                                                 />
-                                                <Typography>
-                                                    {plant?.common_name}
-                                                </Typography>
-                                                <Typography variant="caption">
-                                                    {plant?.scientific_name}
-                                                </Typography>
+                                                <div className="card-name">
+                                                    <Typography>
+                                                        {plant?.common_name}
+                                                    </Typography>
+                                                    <Typography variant="caption">
+                                                        {plant?.scientific_name}
+                                                    </Typography>
+                                                </div>
                                             </Card>
                                         </CardActionArea>
                                     </Tooltip>
@@ -130,6 +133,7 @@ function ToDo() {
                                                 <Card
                                                     key={plant?.id}
                                                     className="result-card"
+                                                    elevation={5}
                                                     sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
                                                 >
                                                     <CardMedia
@@ -138,12 +142,14 @@ function ToDo() {
                                                         image={plantImage(plant)}
                                                         alt={plant?.common_name}
                                                     />
-                                                    <Typography>
-                                                        {plant?.common_name}
-                                                    </Typography>
-                                                    <Typography variant="caption">
-                                                        {plant?.scientific_name}
-                                                    </Typography>
+                                                    <div className="card-name">
+                                                        <Typography>
+                                                            {plant?.common_name}
+                                                        </Typography>
+                                                        <Typography variant="caption">
+                                                            {plant?.scientific_name}
+                                                        </Typography>
+                                                    </div>
                                                 </Card>
                                             </CardActionArea>
                                         </Tooltip>
@@ -163,6 +169,7 @@ function ToDo() {
                                                 <Card
                                                     key={plant?.id}
                                                     className="result-card"
+                                                    elevation={5}
                                                     sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
                                                 >
                                                     <CardMedia
@@ -171,13 +178,16 @@ function ToDo() {
                                                         image={plantImage(plant)}
                                                         alt={plant?.common_name}
 
+
                                                     />
-                                                    <Typography>
-                                                        {plant?.common_name}
-                                                    </Typography>
-                                                    <Typography variant="caption">
-                                                        {plant?.scientific_name}
-                                                    </Typography>
+                                                    <div className="card-name">
+                                                        <Typography>
+                                                            {plant?.common_name}
+                                                        </Typography>
+                                                        <Typography variant="caption">
+                                                            {plant?.scientific_name}
+                                                        </Typography>
+                                                    </div>
                                                 </Card>
                                             </CardActionArea>
                                         </Tooltip>

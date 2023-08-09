@@ -110,7 +110,7 @@ function Home() {
                     </Typography>
                 </div>
                 <div className="mini-todo-box">
-                    <Paper elevation={5} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '90%', justifyContent: 'flex-start', alignItems: 'center', padding: 2, paddingBottom: 4 }}>
+                    <Paper elevation={5} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '90%', justifyContent: 'flex-start', alignItems: 'center', padding: 2, paddingBottom: 5 }}>
                         {userPlant.map(plant => {
                             if (toDoDay(plant) > 0) {
                                 return (
@@ -119,7 +119,7 @@ function Home() {
                                             key={plant?.id}
                                             className="result-card"
                                             elevation={5}
-                                            sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: 1, paddingBottom: 2, objectFit: 'fill' }}
+                                            sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: 1, paddingBottom: 2, objectFit: 'fill', border: "1px solid white" }}
                                         >
                                             <CardMedia
                                                 component='img'
@@ -128,9 +128,8 @@ function Home() {
                                                 image={plantImage(plant)}
                                                 alt={plant?.common_name}
                                                 sx={{objectFit: 'fill'}}
-
                                             />
-                                            <Typography elevation={8} sx={{ display: 'flex', flexDirection: 'column', position: 'absolute', color: 'white' }}>
+                                            <Typography elevation={8} sx={{ display: 'flex', flexDirection: 'column', position: 'absolute', color: 'white', textShadow: '1px 1px black' }}>
                                                 {plant?.common_name}
                                             </Typography>
                                         </Card>

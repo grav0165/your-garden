@@ -35,7 +35,16 @@
     flex-direction: row;
   }
 
- 
+  a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
 
   .container {
     position: inherit;
