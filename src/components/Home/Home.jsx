@@ -110,11 +110,11 @@ function Home() {
                     </Typography>
                 </div>
                 <div className="mini-todo-box">
-                    <Paper elevation={5} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '90%', justifyContent: 'flex-start', alignItems: 'center', padding: 2 }}>
+                    <Paper elevation={5} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '90%', justifyContent: 'flex-start', alignItems: 'center', padding: 2, paddingBottom: 4 }}>
                         {userPlant.map(plant => {
                             if (toDoDay(plant) > 0) {
                                 return (
-                                    <CardActionArea onClick={handleToDo}>
+                                    <CardActionArea onClick={handleToDo} sx={{ width: 160, height: 60}}>
                                         <Card
                                             key={plant?.id}
                                             className="result-card"
