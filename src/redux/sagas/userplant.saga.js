@@ -4,9 +4,9 @@ import { put, takeLatest } from 'redux-saga/effects'
 // Requesting to database to add the user's garden
 
 function* addUserPlant(action) {
-    try{
+    try {
         yield axios.post('/userPlant', action.payload)
-        yield put({ type: 'FETCH_PLANT_USER'})
+        yield put({ type: 'FETCH_PLANT_USER' })
     } catch (error) {
         console.log('Error in SAGA POST for user plants: ', error)
     }
@@ -15,7 +15,7 @@ function* addUserPlant(action) {
 function* fetchUserPlants(action) {
     try {
         const userPlantResponse = yield axios.get('/userPlant')
-        yield put({ type: 'SET_USER_PLANTS', payload: userPlantResponse.data})
+        yield put({ type: 'SET_USER_PLANTS', payload: userPlantResponse.data })
     } catch (error) {
         console.log('Error in SAGA GET request for user plants: ', error)
     }
@@ -24,7 +24,7 @@ function* fetchUserPlants(action) {
 function* userUpdateWater(action) {
     try {
         yield axios.put(`/userPlant/watering/${action.payload}`)
-        yield put({ type: 'FETCH_PLANT_USER'})
+        yield put({ type: 'FETCH_PLANT_USER' })
     } catch (error) {
         console.log('Error in SAGA PUT request: ', error)
     }
@@ -33,7 +33,7 @@ function* userUpdateWater(action) {
 function* userRemovePlant(action) {
     try {
         yield axios.delete(`/userPlant/${action.payload}`)
-        yield put({ type: 'FETCH_PLANT_USER'})
+        yield put({ type: 'FETCH_PLANT_USER' })
     } catch (error) {
         console.log('Error in SAGA DELETE request: ', error)
     }

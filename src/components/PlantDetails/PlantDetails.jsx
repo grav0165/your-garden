@@ -224,28 +224,28 @@ function PlantDetails() {
                     <div className='mini-map'>
                         <Card elevation={5} sx={{ display: 'flex', flexDirection: 'row' }}>
                             <Box sx={{ padding: 4 }}>
-                                <Typography sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1}}>
-                                    <ChangeCircleIcon sx={{color: 'green'}} /> Cycle: {plantDetails?.base?.cycle ? plantDetails?.base?.cycle : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <ChangeCircleIcon sx={{ color: 'green' }} /> Cycle: {plantDetails?.base?.cycle ? plantDetails?.base?.cycle : 'Unknown'}
                                 </Typography>
-                                <Typography sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1}}>
-                                    <HouseIcon sx={{ color: '#B70404' }}/> Indoors: {plantDetails?.base?.indoor ? "Yes" : "No"}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <HouseIcon sx={{ color: '#B70404' }} /> Indoors: {plantDetails?.base?.indoor ? "Yes" : "No"}
                                 </Typography>
-                                <Typography sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1}}>
-                                    <AgricultureIcon sx={{color: '#367C2B'}} /> Soil type: {plantDetails?.base?.soil[0] ? plantDetails?.base?.soil : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <AgricultureIcon sx={{ color: '#367C2B' }} /> Soil type: {plantDetails?.base?.soil[0] ? plantDetails?.base?.soil : 'Unknown'}
                                 </Typography >
                             </Box>
                             <Box sx={{ padding: 4 }}>
-                                <Typography sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1}}>
-                                    <WaterDropIcon sx={{color: 'blue'}} /> Watering: {plantDetails?.base?.watering ? plantDetails?.base?.watering : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <WaterDropIcon sx={{ color: 'blue' }} /> Watering: {plantDetails?.base?.watering ? plantDetails?.base?.watering : 'Unknown'}
                                 </Typography>
-                                <Typography sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1}}>
-                                    <WbSunnyIcon sx={{color: 'yellow'}} /> Sun: {plantDetails?.base?.sunlight[0] ? plantDetails?.base?.sunlight[0] : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <WbSunnyIcon sx={{ color: 'yellow' }} /> Sun: {plantDetails?.base?.sunlight[0] ? plantDetails?.base?.sunlight[0] : 'Unknown'}
                                 </Typography>
-                                <Typography sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1}}>
-                                    <HourglassTopIcon sx={{color: 'grey'}} /> Maintenance: {plantDetails?.base?.maintenance ? plantDetails?.base?.maintenance : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <HourglassTopIcon sx={{ color: 'grey' }} /> Maintenance: {plantDetails?.base?.maintenance ? plantDetails?.base?.maintenance : 'Unknown'}
                                 </Typography>
-                                <Typography sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1}}>
-                                    <GrassIcon sx={{color: '#5B9A8B' }}/> Growth Rate: {plantDetails?.base?.growth_rate ? plantDetails?.base?.growth_rate : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <GrassIcon sx={{ color: '#5B9A8B' }} /> Growth Rate: {plantDetails?.base?.growth_rate ? plantDetails?.base?.growth_rate : 'Unknown'}
                                 </Typography>
                             </Box>
                         </Card>
