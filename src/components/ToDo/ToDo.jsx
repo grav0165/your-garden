@@ -81,7 +81,6 @@ function ToDo() {
 
 
 
-
     return (
 
         <div className="to-do-page">
@@ -90,6 +89,42 @@ function ToDo() {
                     <h3>To Do Today</h3>
                     <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll' }}>
                         {userPlantList.map(plant => {
+                            if(toDoDay(plant) > 1) {
+                                return (
+                                    <Tooltip title="Click me to mark your plant as watered">
+                                        <CardActionArea onClick={() => handleWateringUpdate(plant)} sx={{ width: 280, margin: 1 }}>
+                                            <Card
+                                                key={plant?.id}
+                                                className="result-card"
+                                                elevation={5}
+                                                sx={{ backgroundColor: '#e06469', width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
+                                            >
+                                                <Typography
+                                                    variant="caption"
+                                                    sx={{ display: 'flex', position: 'absolute', right: '115px', color: 'white', textShadow: '2px 2px 4px #000000'}}
+                                                >
+                                                    Over Due
+                                                </Typography>
+                                                <CardMedia
+                                                    component='img'
+                                                    height='240'
+                                                    image={plantImage(plant)}
+                                                    alt={plant?.common_name}
+                                                />
+                                                <div className="card-name">
+                                                    <Typography>
+                                                        {plant?.common_name}
+                                                    </Typography>
+                                                    <Typography variant="caption">
+                                                        {plant?.scientific_name}
+                                                    </Typography>
+                                                </div>
+                                            </Card>
+                                        </CardActionArea>
+                                    </Tooltip>
+
+                                )
+                            }
                             if (toDoDay(plant) > 0) {
                                 return (
                                     <Tooltip title="Click me to mark your plant as watered">
@@ -98,7 +133,7 @@ function ToDo() {
                                                 key={plant?.id}
                                                 className="result-card"
                                                 elevation={5}
-                                                sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
+                                                sx={{width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
                                             >
                                                 <CardMedia
                                                     component='img'
