@@ -11,8 +11,8 @@ function UserPage() {
     <div className="user-container">
       <h2>Welcome, {user.username}!</h2>
       <div className='info-part'>
-      <div className='info-part-1'>
-          <Typography sx={{fontWeight: 'bold'}}>
+        <div className='info-part-1'>
+          <Typography sx={{ fontWeight: 'bold' }}>
             Purpose:
           </Typography>
           <Typography sx={{ width: 300, marginBottom: 2 }}>
@@ -20,7 +20,7 @@ function UserPage() {
             monitor watering habits of your garden to make the day-to-day care of your projects
             that much easier to manage.
           </Typography>
-          <Typography sx={{fontWeight: 'bold'}}>
+          <Typography sx={{ fontWeight: 'bold' }}>
             Home:
           </Typography>
           <Typography sx={{ width: 300, marginBottom: 2 }}>
@@ -28,7 +28,7 @@ function UserPage() {
             in a mini-todo bar which takes the user to the full To-Do page. Beneath is an easy
             to access search bar to begin adding and researching plants.
           </Typography>
-          <Typography sx={{fontWeight: 'bold'}}>
+          <Typography sx={{ fontWeight: 'bold' }}>
             Search:
           </Typography>
           <Typography sx={{ width: 300, marginBottom: 2 }}>
@@ -37,7 +37,7 @@ function UserPage() {
           </Typography>
         </div>
         <div className='info-part-2'>
-        <Typography sx={{fontWeight: 'bold'}}>
+          <Typography sx={{ fontWeight: 'bold' }}>
             Your Garden:
           </Typography>
           <Typography sx={{ width: 300, marginBottom: 2 }}>
@@ -45,7 +45,7 @@ function UserPage() {
             ability to click into any of the cards and also go to the details page to get further
             information about a given plant.
           </Typography>
-          <Typography sx={{fontWeight: 'bold'}}>
+          <Typography sx={{ fontWeight: 'bold' }}>
             Details:
           </Typography>
           <Typography sx={{ width: 300, marginBottom: 2 }}>
@@ -54,8 +54,9 @@ function UserPage() {
           </Typography>
         </div>
       </div>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
+      <div className='log-out-button'>
+        <LogOutButton className="btn" />
+      </div>
     </div >
   );
 }

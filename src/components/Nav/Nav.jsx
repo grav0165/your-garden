@@ -10,7 +10,32 @@ function Nav() {
   return (
     <div className="nav">
       <div className='logo-name'>
-        <Link to="/home">
+        {!user.id ? (
+          <Link to="/landingpage">
+            <img
+              src='./images/flower-transparent.png'
+              height={60}
+              alt='flower'
+              className='flower-icon'
+            />
+            <div className='page-logo'>
+              <h2 className="nav-title">Your Garden</h2>
+            </div>
+          </Link>
+        ) : (
+          <Link to="/home">
+            <img
+              src='./images/flower-transparent.png'
+              height={60}
+              alt='flower'
+              className='flower-icon'
+            />
+            <div className='page-logo'>
+              <h2 className="nav-title">Your Garden</h2>
+            </div>
+          </Link>
+        )}
+        {/* <Link to="/home">
           <img
             src='./images/flower-transparent.png'
             height={60}
@@ -22,7 +47,7 @@ function Nav() {
           <Link to="/home">
             <h2 className="nav-title">Your Garden</h2>
           </Link>
-        </div>
+        </div> */}
       </div>
       <div>
         {/* If no user is logged in, show these links */}
