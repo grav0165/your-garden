@@ -87,7 +87,7 @@ function ToDo() {
             <ThemeProvider theme={theme}>
                 <Container>
                     <h3>To Do Today</h3>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll' }}>
                         {userPlantList.map(plant => {
                             if(toDoDay(plant) > 1) {
                                 return (
@@ -158,7 +158,7 @@ function ToDo() {
                         })}
                     </Box>
                     <h3>To Do Tomorrow</h3>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll' }}>
                         {userPlantList.map(plant => {
                             if (-1 < toDoDay(plant)) {
                                 if (toDoDay(plant) < 0) {
@@ -194,7 +194,7 @@ function ToDo() {
                         })}
                     </Box>
                     <h3>To Do the Day After Tomorrow</h3>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll' }}>
                         {userPlantList.map(plant => {
                             if (-2 < toDoDay(plant)) {
                                 if (toDoDay(plant) < -1) {
