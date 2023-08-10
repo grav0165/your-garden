@@ -14,7 +14,8 @@ userPlantRouter.get('/', rejectUnauthenticated, (req, res) => {
     FROM "user_plant"
     JOIN "plant_table" ON "plant_table"."id" = "user_plant"."plant_id"
     WHERE "user_plant"."user_id" = $1
-    GROUP BY "user_plant"."id", "user_plant"."plant_id", "user_plant"."added_date", "plant_table"."common_name", "plant_table"."scientific_name", "plant_table"."cycle", "plant_table"."indoors", "plant_table"."soil", "plant_table"."growth_rate", "plant_table"."watering", "plant_table"."maintenance", "plant_table"."sun", "plant_table"."image", "plant_table"."description", "plant_table"."watering_description", "plant_table"."sunlight_description", "user_plant"."water_date", "user_plant"."water_days", "plant_table"."api_id" ;
+    GROUP BY "user_plant"."id", "user_plant"."plant_id", "user_plant"."added_date", "plant_table"."common_name", "plant_table"."scientific_name", "plant_table"."cycle", "plant_table"."indoors", "plant_table"."soil", "plant_table"."growth_rate", "plant_table"."watering", "plant_table"."maintenance", "plant_table"."sun", "plant_table"."image", "plant_table"."description", "plant_table"."watering_description", "plant_table"."sunlight_description", "user_plant"."water_date", "user_plant"."water_days", "plant_table"."api_id"
+    ORDER BY "user_plant"."added_date" ;
     `;
     pool.query(sqlQuery, [sqlUserId])
         .then(result => {
