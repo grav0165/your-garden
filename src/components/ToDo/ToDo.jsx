@@ -14,6 +14,32 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Box from "@mui/material/Box"
 import Paper from "@mui/material/Paper"
 import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider, Tooltip } from "@mui/material";
+
+const theme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: {
+            main: '#a0c49d',
+        },
+        secondary: {
+            main: '#c4d7b2',
+        },
+        background: {
+            paper: '#a0c49d',
+            default: '#e1ecc8',
+        },
+        error: {
+            main: '#e06469',
+        },
+        warning: {
+            main: '#f2b6a0',
+        },
+        info: {
+            main: '#dedea7',
+        },
+    },
+});
 
 function ToDo() {
     // Adding dispatch to help with PUT requests
@@ -55,97 +81,159 @@ function ToDo() {
 
 
 
-
     return (
 
         <div className="to-do-page">
-            <Container>
-                <h3>To Do Today</h3>
-                <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll' }}>
-                    {userPlantList.map(plant => {
-                        if (toDoDay(plant) > 0) {
-                            return (
-                                <CardActionArea onClick={() => handleWateringUpdate(plant)}>
-                                    <Card
-                                        key={plant?.id}
-                                        className="result-card"
-                                        sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, margin: 3, padding: 2, paddingBottom: 3 }}
-                                    >
-                                        <CardMedia
-                                            component='img'
-                                            height='240'
-                                            image={plantImage(plant)}
-                                            alt={plant?.common_name}
-                                        />
-                                        <Typography>
-                                            {plant?.common_name}
-                                        </Typography>
-                                    </Card>
-                                </CardActionArea>
-
-                            )
-                        }
-                    })}
-                </Box>
-                <h3>To Do Tomorrow</h3>
-                <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll' }}>
-                    {userPlantList.map(plant => {
-                        if (-1 < toDoDay(plant)) {
-                            if (toDoDay(plant) < 0) {
+            <ThemeProvider theme={theme}>
+                <Container>
+                    <h3>To Do Today</h3>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll' }}>
+                        {userPlantList.map(plant => {
+                            if(toDoDay(plant) > 1) {
                                 return (
-                                    <CardActionArea onClick={() => handleWateringUpdate(plant)}>
-                                        <Card
-                                            key={plant?.id}
-                                            className="result-card"
-                                            sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
-                                        >
-                                            <CardMedia
-                                                component='img'
-                                                height='240'
-                                                image={plantImage(plant)}
-                                                alt={plant?.common_name}
-                                            />
-                                            <Typography>
-                                                {plant?.common_name}
-                                            </Typography>
-                                        </Card>
-                                    </CardActionArea>
+                                    <Tooltip title="Click me to mark your plant as watered">
+                                        <CardActionArea onClick={() => handleWateringUpdate(plant)} sx={{ width: 280, margin: 1 }}>
+                                            <Card
+                                                key={plant?.id}
+                                                className="result-card"
+                                                elevation={5}
+                                                sx={{ backgroundColor: '#e06469', width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
+                                            >
+                                                <Typography
+                                                    variant="caption"
+                                                    sx={{ display: 'flex', position: 'absolute', right: '115px', color: 'white', textShadow: '2px 2px 4px #000000'}}
+                                                >
+                                                    Over Due
+                                                </Typography>
+                                                <CardMedia
+                                                    component='img'
+                                                    height='240'
+                                                    image={plantImage(plant)}
+                                                    alt={plant?.common_name}
+                                                />
+                                                <div className="card-name">
+                                                    <Typography>
+                                                        {plant?.common_name}
+                                                    </Typography>
+                                                    <Typography variant="caption">
+                                                        {plant?.scientific_name}
+                                                    </Typography>
+                                                </div>
+                                            </Card>
+                                        </CardActionArea>
+                                    </Tooltip>
 
                                 )
                             }
-                        }
-                    })}
-                </Box>
-                <h3>To Do the Day After Tomorrow</h3>
-                <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'scroll' }}>
-                    {userPlantList.map(plant => {
-                        if (-2 < toDoDay(plant)) {
-                            if (toDoDay(plant) < -1) {
+                            if (toDoDay(plant) > 0) {
                                 return (
-                                    <CardActionArea onClick={() => handleWateringUpdate(plant)}>
-                                        <Card
-                                            key={plant?.id}
-                                            className="result-card"
-                                            sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 3, padding: 2, paddingBottom: 3 }}
-                                        >
-                                            <CardMedia
-                                                component='img'
-                                                height='240'
-                                                image={plantImage(plant)}
-                                                alt={plant?.common_name}
-                                            />
-                                            <Typography>
-                                                {plant?.common_name}
-                                            </Typography>
-                                        </Card>
-                                    </CardActionArea>
+                                    <Tooltip title="Click me to mark your plant as watered">
+                                        <CardActionArea onClick={() => handleWateringUpdate(plant)} sx={{ width: 280, margin: 1 }}>
+                                            <Card
+                                                key={plant?.id}
+                                                className="result-card"
+                                                elevation={5}
+                                                sx={{width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
+                                            >
+                                                <CardMedia
+                                                    component='img'
+                                                    height='240'
+                                                    image={plantImage(plant)}
+                                                    alt={plant?.common_name}
+                                                />
+                                                <div className="card-name">
+                                                    <Typography>
+                                                        {plant?.common_name}
+                                                    </Typography>
+                                                    <Typography variant="caption">
+                                                        {plant?.scientific_name}
+                                                    </Typography>
+                                                </div>
+                                            </Card>
+                                        </CardActionArea>
+                                    </Tooltip>
 
                                 )
                             }
-                        }
-                    })}
-                </Box>
-            </Container>
+                        })}
+                    </Box>
+                    <h3>To Do Tomorrow</h3>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll' }}>
+                        {userPlantList.map(plant => {
+                            if (-1 < toDoDay(plant)) {
+                                if (toDoDay(plant) < 0) {
+                                    return (
+                                        <Tooltip title="Click me to mark your plant as watered">
+                                            <CardActionArea onClick={() => handleWateringUpdate(plant)} sx={{ width: 280, margin: 1 }}>
+                                                <Card
+                                                    key={plant?.id}
+                                                    className="result-card"
+                                                    elevation={5}
+                                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
+                                                >
+                                                    <CardMedia
+                                                        component='img'
+                                                        height='240'
+                                                        image={plantImage(plant)}
+                                                        alt={plant?.common_name}
+                                                    />
+                                                    <div className="card-name">
+                                                        <Typography>
+                                                            {plant?.common_name}
+                                                        </Typography>
+                                                        <Typography variant="caption">
+                                                            {plant?.scientific_name}
+                                                        </Typography>
+                                                    </div>
+                                                </Card>
+                                            </CardActionArea>
+                                        </Tooltip>
+                                    )
+                                }
+                            }
+                        })}
+                    </Box>
+                    <h3>To Do the Day After Tomorrow</h3>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll' }}>
+                        {userPlantList.map(plant => {
+                            if (-2 < toDoDay(plant)) {
+                                if (toDoDay(plant) < -1) {
+                                    return (
+                                        <Tooltip title="Click me to mark your plant as watered">
+                                            <CardActionArea onClick={() => handleWateringUpdate(plant)} sx={{ width: 280, margin: 1 }}>
+                                                <Card
+                                                    key={plant?.id}
+                                                    className="result-card"
+                                                    elevation={5}
+                                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 0.5, padding: 2, paddingBottom: 3 }}
+                                                >
+                                                    <CardMedia
+                                                        component='img'
+                                                        height='240'
+                                                        image={plantImage(plant)}
+                                                        alt={plant?.common_name}
+
+
+                                                    />
+                                                    <div className="card-name">
+                                                        <Typography>
+                                                            {plant?.common_name}
+                                                        </Typography>
+                                                        <Typography variant="caption">
+                                                            {plant?.scientific_name}
+                                                        </Typography>
+                                                    </div>
+                                                </Card>
+                                            </CardActionArea>
+                                        </Tooltip>
+
+                                    )
+                                }
+                            }
+                        })}
+                    </Box>
+                </Container>
+            </ThemeProvider>
             <div className="to-do-bottom">
                 <br />
                 <br />

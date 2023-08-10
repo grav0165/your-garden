@@ -4,3 +4,9 @@
     align-items: center;
     margin-top: 14px;
 }
+
+.your-garden-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

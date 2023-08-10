@@ -39,8 +39,8 @@ let theme = createTheme({
             main: '#dedea7',
         },
     },
-    
-}, );
+
+},);
 theme = responsiveFontSizes(theme)
 
 function UserGarden() {
@@ -64,7 +64,7 @@ function UserGarden() {
         }
     }
 
-    
+
 
     // Use Effect on page load to obtain users plant information
     useEffect(() => {
@@ -109,17 +109,17 @@ function UserGarden() {
 
         } else {
             pageContent =
-                <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 3, sm: 4, md: 8 }} sx={{ width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 3, sm: 4, md: 8 }} sx={{ width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     {userPlantResult.map(plant => {
                         return (
                             <Grid >
-                                <Card
-                                    key={plant?.id}
-                                    sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, margin: 1, padding: 2, paddingBottom: 3 }}
-                                    className="result-card"
-                                    elevation={5}
+                                <CardActionArea onClick={() => handleDetails(event, plant)} sx={{display: 'flex', flexDirection: 'column', width: 280, margin: 1}}>
+                                    <Card
+                                        key={plant?.id}
+                                        sx={{ width: 250, height: 300, display: 'flex', flexDirection: 'column', gap: 1, padding: 2, paddingBottom: 3 }}
+                                        className="result-card"
+                                        elevation={5}
                                     >
-                                    <CardActionArea onClick={() => handleDetails(event, plant)}>
                                         <CardMedia
                                             component='img'
                                             height='240'
@@ -131,13 +131,13 @@ function UserGarden() {
                                                 {plant?.common_name}
                                             </Typography>
                                             <Typography
-                                                variant="body2"
+                                                variant="caption"
                                                 color="text.secondary">
                                                 {plant?.scientific_name}
                                             </Typography>
                                         </div>
-                                    </CardActionArea>
-                                </Card>
+                                    </Card>
+                                </CardActionArea>
                             </Grid>
                         )
                     })}
@@ -150,7 +150,7 @@ function UserGarden() {
     return (
         <ThemeProvider theme={theme}>
             <div className="your-garden-main">
-                <Card elevation={5} sx={{ width: '90%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2, marginBottom: 5}}>
+                <Card elevation={5} sx={{ width: '90%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2, marginBottom: 5 }}>
                     <Typography variant="h4">
                         Welcome to your garden state of mind
                     </Typography>
@@ -161,7 +161,7 @@ function UserGarden() {
                 <br />
                 <br />
                 <br />
-                
+
             </div>
         </ThemeProvider>
     )

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import './LoginForm.css'
@@ -38,6 +39,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const login = (event) => {
     event.preventDefault();
@@ -58,39 +60,52 @@ function LoginForm() {
   return (
     <div className='login-box'>
       <ThemeProvider theme={theme}>
-        <Card sx={{ padding: 2, height: 400, width: 290, display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(160, 196, 157, 0.9)' }}>
+        <Card sx={{ padding: 2, height: 400, width: 290, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', backgroundColor: 'rgba(160, 196, 157, 0.9)' }}>
           <div className='login-top'>
-            <Typography>
-              <h2>Login</h2>
-              {errors.loginMessage && (
-                <h3 className="alert" role="alert">
-                  {errors.loginMessage}
-                </h3>
-              )}
-            </Typography>
-            <TextField
-              id="filled-basic"
-              variant="filled"
-              label="username"
-              value={username}
-              required
-              color="success"
-              onChange={(event) => setUsername(event.target.value)}
-              sx={{ marginBottom: 2}}
-            />
-            <TextField
-              id="filled-basic"
-              variant="filled"
-              label="password"
-              type="password"
-              value={password}
-              color='success'
-              required
-              onChange={(event) => setPassword(event.target.value)}
-            />
+            <div className='login-top-info'>
+              <Typography>
+                <h2>Login</h2>
+                {errors.loginMessage && (
+                  <h3 className="alert" role="alert">
+                    {errors.loginMessage}
+                  </h3>
+                )}
+              </Typography>
+              <TextField
+                id="filled-basic"
+                variant="filled"
+                label="username"
+                value={username}
+                required
+                color="success"
+                onChange={(event) => setUsername(event.target.value)}
+                sx={{ marginBottom: 2, width: '100%' }}
+              />
+              <TextField
+                id="filled-basic"
+                variant="filled"
+                label="password"
+                type="password"
+                value={password}
+                color='success'
+                required
+                onChange={(event) => setPassword(event.target.value)}
+                sx={{width: '100%' }}
+              />
+            </div>
+            <div className='button'>
+              <Button color='success' sx={{ marginTop: 2 }} onClick={login}>Log In</Button>
+            </div>
           </div>
-          <div className='button'>
-            <Button color='success' sx={{ marginTop: 2}} onClick={login}>Log In</Button>
+          <div className='register-button-div'>
+            <Button
+              color='success'
+              onClick={() => {
+                history.push('/registration');
+              }}
+            >
+              Register
+            </Button>
           </div>
         </Card>
       </ThemeProvider>

@@ -42,9 +42,36 @@ import HouseIcon from '@mui/icons-material/House';
 import GrassIcon from '@mui/icons-material/Grass';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import FormHelperText from '@mui/material/FormHelperText';
-import { FormControl } from '@mui/material';
+import { FormControl, Divider } from '@mui/material';
 
-let theme = createTheme();
+
+
+
+let theme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: {
+            main: '#a0c49d',
+        },
+        secondary: {
+            main: '#c4d7b2',
+        },
+        background: {
+            paper: '#a0c49d',
+            default: '#e1ecc8',
+        },
+        error: {
+            main: '#e06469',
+        },
+        warning: {
+            main: '#f2b6a0',
+        },
+        info: {
+            main: '#dedea7',
+        },
+    },
+});
+
 theme = responsiveFontSizes(theme);
 
 function PlantDetails() {
@@ -191,45 +218,45 @@ function PlantDetails() {
                     </Grid>
                 </div>
                 <div className="interaction-buttons">
-                    <Button size="large" variant="contained" elevation={5} sx={{ margin: 1 }} onClick={handleReturn} startIcon={<SkipPreviousIcon />}>Return</Button>
+                    <Button size="large" variant="contained" color="success" elevation={5} sx={{ margin: 1 }} onClick={handleReturn} startIcon={<SkipPreviousIcon />}>Return</Button>
                 </div>
                 <div className="additional-details">
                     <div className='mini-map'>
                         <Card elevation={5} sx={{ display: 'flex', flexDirection: 'row' }}>
                             <Box sx={{ padding: 4 }}>
-                                <Typography>
-                                    <ChangeCircleIcon /> Cycle: {plantDetails?.base?.cycle ? plantDetails?.base?.cycle : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <ChangeCircleIcon sx={{ color: 'green' }} /> Cycle: {plantDetails?.base?.cycle ? plantDetails?.base?.cycle : 'Unknown'}
                                 </Typography>
-                                <Typography>
-                                    <HouseIcon /> Indoors: {plantDetails?.base?.indoor ? "Yes" : "No"}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <HouseIcon sx={{ color: '#B70404' }} /> Indoors: {plantDetails?.base?.indoor ? "Yes" : "No"}
                                 </Typography>
-                                <Typography>
-                                    <AgricultureIcon /> Soil type: {plantDetails?.base?.soil[0] ? plantDetails?.base?.soil : 'Unknown'}
-                                </Typography>
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <AgricultureIcon sx={{ color: '#367C2B' }} /> Soil type: {plantDetails?.base?.soil[0] ? plantDetails?.base?.soil : 'Unknown'}
+                                </Typography >
                             </Box>
-
                             <Box sx={{ padding: 4 }}>
-                                <Typography>
-                                    <WaterDropIcon /> Watering: {plantDetails?.base?.watering ? plantDetails?.base?.watering : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <WaterDropIcon sx={{ color: 'blue' }} /> Watering: {plantDetails?.base?.watering ? plantDetails?.base?.watering : 'Unknown'}
                                 </Typography>
-                                <Typography>
-                                    <WbSunnyIcon /> Sun: {plantDetails?.base?.sunlight[0] ? plantDetails?.base?.sunlight[0] : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <WbSunnyIcon sx={{ color: 'yellow' }} /> Sun: {plantDetails?.base?.sunlight[0] ? plantDetails?.base?.sunlight[0] : 'Unknown'}
                                 </Typography>
-                                <Typography>
-                                    <HourglassTopIcon /> Maintenance: {plantDetails?.base?.maintenance ? plantDetails?.base?.maintenance : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <HourglassTopIcon sx={{ color: 'grey' }} /> Maintenance: {plantDetails?.base?.maintenance ? plantDetails?.base?.maintenance : 'Unknown'}
                                 </Typography>
-                                <Typography>
-                                    <GrassIcon /> Growth Rate: {plantDetails?.base?.growth_rate ? plantDetails?.base?.growth_rate : 'Unknown'}
+                                <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
+                                    <GrassIcon sx={{ color: '#5B9A8B' }} /> Growth Rate: {plantDetails?.base?.growth_rate ? plantDetails?.base?.growth_rate : 'Unknown'}
                                 </Typography>
                             </Box>
                         </Card>
                     </div>
                     <div className='sunlight-description'>
                         <Card elevation={5} sx={{ padding: 4 }}>
-                            <Typography sx={{ display: 'flex', flexDirection: 'row' }}>
+                            <Typography sx={{ display: 'flex', flexDirection: 'row', marginBottom: 1 }}>
                                 Sunlight suggestions:
                             </Typography>
-                            <Typography sx={{ display: 'flex', flexDirection: 'row', width: 350 }}>
+                            <Divider />
+                            <Typography sx={{ display: 'flex', flexDirection: 'row', width: 350, marginTop: 1 }}>
                                 {plantDetails?.care?.[0]?.section?.[1]?.description}
                             </Typography>
                         </Card>
@@ -274,7 +301,7 @@ function PlantDetails() {
                             </Table>
                         </TableContainer>
                         <DialogActions sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 1 }}>
-                            <Button size="large" variant="contained" onClick={handleCancel}>Return</Button>
+                            <Button size="large" variant="contained" color="warning" onClick={handleCancel}>Return</Button>
                         </DialogActions>
                     </Dialog>
 
@@ -290,6 +317,8 @@ function PlantDetails() {
                             <FormControl variant="filled" size="small">
                                 <TextField
                                     id="outlined-select-currency"
+                                    variant="filled"
+                                    color="success"
                                     select
                                     label="Select Frequency"
                                     defaultValue=""

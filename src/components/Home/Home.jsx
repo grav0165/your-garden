@@ -20,15 +20,6 @@ import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 
 
-// Testing image layout
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
-
-
 const theme = createTheme({
     palette: {
         mode: 'light',
@@ -113,17 +104,22 @@ function Home() {
                 <div className="welcome-message">
                     <h1> Welcome home, {user.username}</h1>
                 </div>
+                <div className="to-do-statement">
+                    <Typography variant="secondary.text">
+                        this is what we need to take care of today
+                    </Typography>
+                </div>
                 <div className="mini-todo-box">
-                    <Paper elevation={5} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '90%', justifyContent: 'flex-start', alignItems: 'center', padding: 1 }}>
+                    <Paper elevation={5} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'scroll', width: '90%', justifyContent: 'flex-start', alignItems: 'center', padding: 2, paddingBottom: 5 }}>
                         {userPlant.map(plant => {
                             if (toDoDay(plant) > 0) {
                                 return (
-                                    <CardActionArea onClick={handleToDo}>
+                                    <CardActionArea onClick={handleToDo} sx={{ width: 160, height: 60}}>
                                         <Card
                                             key={plant?.id}
                                             className="result-card"
                                             elevation={5}
-                                            sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: 3, paddingBottom: 2, objectFit: 'fill' }}
+                                            sx={{ width: 150, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: 1, paddingBottom: 2, objectFit: 'fill', border: "1px solid white" }}
                                         >
                                             <CardMedia
                                                 component='img'
@@ -132,9 +128,8 @@ function Home() {
                                                 image={plantImage(plant)}
                                                 alt={plant?.common_name}
                                                 sx={{objectFit: 'fill'}}
-
                                             />
-                                            <Typography elevation={8} sx={{ display: 'flex', flexDirection: 'column', position: 'absolute', color: 'white' }}>
+                                            <Typography elevation={8} sx={{ display: 'flex', flexDirection: 'column', position: 'absolute', color: 'white', textShadow: '1px 1px black' }}>
                                                 {plant?.common_name}
                                             </Typography>
                                         </Card>
