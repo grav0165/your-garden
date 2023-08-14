@@ -70,9 +70,9 @@ Add additional notes about how to deploy this on a live system
 * [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-* [Javascript](https://www.javascript.com/)
-* [React](https://react.dev/)
-* [Node.js](https://nodejs.org/en/)
+* [Javascript](https://www.javascript.com/) - Used as logic framework
+* [React](https://react.dev/) - Used in logic and web framework
+* [Node.js](https://nodejs.org/en/) - Used in server and database logic
 
 ## Contributing
 
