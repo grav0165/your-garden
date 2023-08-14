@@ -52,6 +52,9 @@ function AboutPage() {
                   Technologies Used in this project:
                 </Typography>
                 <Typography>
+                  - HTML
+                </Typography>
+                <Typography>
                   - Javascript
                 </Typography>
                 <Typography>
@@ -71,6 +74,9 @@ function AboutPage() {
                 </Typography>
                 <Typography>
                   - PostgreSQL
+                </Typography>
+                <Typography>
+                  - Passport
                 </Typography>
                 <Typography>
                   - Material UI
@@ -101,7 +107,7 @@ function AboutPage() {
                   🫥 Jon for asking the questions I always forget to ask
                 </Typography>
                 <Typography>
-                  🤐 Justin for always mentally checking if those complaints ever really mattered
+                  🤐 Justin for making me think over my options instead of just yelling
                 </Typography>
                 <Typography>
                   🦆 Peder for doing free photoshop design work and being a top tier rubber duck
@@ -129,7 +135,7 @@ function AboutPage() {
                   Emma for being my favorite instructor of my entire educational career.
                   Never a moment I didn't feel her passion for teaching and desire to see
                   each one of us succeed. Your resolve inspired me to become a better
-                  student
+                  student.
                 </Typography>
               </Card>
               <Card sx={{ width: 400, height: 100, padding: 3 }}>

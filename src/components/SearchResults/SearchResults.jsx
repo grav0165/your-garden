@@ -96,7 +96,7 @@ function searchResults() {
         (
             <>
                 <ThemeProvider theme={theme}>
-                    <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 3, sm: 4, md: 8 }} sx={{ width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                    <Grid container spacing={{ s: 2, md: 0.5 }} columns={{ xs: 3, sm: 4, md: 8 }} sx={{ width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
                         {apiSearchResult.map(plant => {
                             return (
                                 <Grid>
