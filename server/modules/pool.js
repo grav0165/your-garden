@@ -28,7 +28,7 @@ else {
     pool = new pg.Pool({
         host: 'localhost',
         port: 5432,
-        database: 'your-garden',   // 	💥 Change this to the name of your database!
+        database: 'yourgarden',   // 	💥 Change this to the name of your database!
     });
 }
 
