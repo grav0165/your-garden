@@ -1,121 +1,100 @@
+# Your Garden
 
-# Prime Solo Project Starting Repo
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+Your Garden is a simplified gardening tracker in order to give the user the ability to quickly research different types of plants they might add to their garden, add specific plants to their own garden, and track daily the watering needs of any plants they may have. This gives the user an easy way to manage an otherwise complicated process.
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+## Getting Started
 
-## Use the Template for This Repository (Don't Clone)
+Fork the repo to your own github, then clone down to your machine. You will need an API key from [Perenual](https://perenual.com/docs/api) in order to make the correct search calls to the database. You will also need a working local database to hold user and plant information. Using Postgres, copy all tables in database.sql file included in the repo.
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account. Make the project `PUBLIC`!
-
-
-## Prerequisites
-
-Before you get started, make sure you have the following software installed on your computer:
+### Prerequisites
 
 - [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+- [MaterialUI](https://mui.com/)
+- [Redux](https://redux.js.org/)
+- [Axios](https://axios-http.com/docs/intro)
+- [Redux](https://react.dev/)
+- [ReduxSaga](https://redux-saga.js.org/)
+- [Momentjs](https://momentjs.com/)
+- [Perenual](https://perenual.com/docs/api)
 
-## Create database and table
+### Installing
 
-Create a new database called `prime_app` and create a `user` table:
+The project has all dependencies sources in the package.json file. However, additional icons were used from the MaterialUI project which can be sourced from https://mui.com/material-ui/material-icons/. 
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
+1. Create a database named `your_garden`,
+2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
+3. Open up your editor of choice and run an `npm install`
+4. Run `npm run server` in your terminal
+5. Run `npm run client` in your terminal
+6. The `npm run client` command will open up a new browser tab for you!
+
+## Usage
+
+1. Upon launching the server and client, you will be taken to a landing page of To-Do and search.
+2. Each plant card in the user's garden will be clickable if the plant is added to the garden is it is due to be watered.
+3. To add a plant to the user's garden, the user can type in any information into the search box, and click 'search'.
+4. All results will return as clickable cards which will take the user to additional details
+5. The details will show a larger image, further description, planting/sun information, and etc.
+6. Clicking add will bring up a popper window to ask the user how often they'd like to water their plant, and confirm if they truly desire to add
+7. Clicking remove will bring up a popper window allowing the user to then remove a plant from their garden
+8. The top nav bar has 'To Do', which lists out different plants that the user needs to water that day.
+9. Any cards in red indicate the user missed watering that plant the day prior and are in dire need of attention
+10. The top nav bar has 'Your Garden', which displays all plants within a given users garden, allowing to navigation back to the details screen
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
 ```
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+### And coding style tests
 
-## Development Setup Instructions
+Explain what these tests test and why
 
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
-
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
+```
+Give an example
+```
 
 ## Deployment
 
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
+Add additional notes about how to deploy this on a live system
 
-## Update Documentation
+## Built With
 
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Javascript](https://www.javascript.com/)
+* [React](https://react.dev/)
+* [Node.js](https://nodejs.org/en/)
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Aubrey Graves** - *Initial work* - [Grav0165](https://github.com/grav0165)
+
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Special thanks to Perenual API for having excellent documentation on how to access and use their features.
+* Inspiration for this project came from a personal desire to become a better gardener through a simple application. A skill I picked up during COVID lockdown was tending to plants to give myself peace of mind and something to do while we were all stuck inside. It made the world seem just a little less crazy and personally felt like I was accomplishing things.
+
+
