@@ -22,7 +22,7 @@ CREATE TABLE "plant_table" (
 	"maintenance" varchar(80),
 	"sun" varchar(100),
 	"image" varchar(2000),
-	"description" varchar(1000),
+	"description" varchar(1000),node.node
 	"watering_description" varchar(1000),
 	"sunlight_description" varchar(1000)
 );
